@@ -104,6 +104,8 @@ for symbol, coingecko_id in cryptos.items():
 # Plotting in terminal with plotext
 if all_dates:
     plt.clear_figure()
+    plt.canvas_color("white")
+    plt.axes_color("white")
     
     # Create a figure with 3 rows and 1 column for subplots
     plt.subplots(3, 1)
@@ -117,6 +119,14 @@ if all_dates:
             plt.subplot(i + 1, 1)
             plt.title(f"{symbol} Price (Last 30 Days)")
             plt.plot(all_dates, all_prices_dict[symbol], color=colors[i])
+            
+            # Add trendline from start to end in yellow
+            if len(all_prices_dict[symbol]) >= 2:
+                start_price = all_prices_dict[symbol][0]
+                end_price = all_prices_dict[symbol][-1]
+                trendline_dates = [all_dates[0], all_dates[-1]]
+                trendline_prices = [start_price, end_price]
+                plt.plot(trendline_dates, trendline_prices, color="bright_yellow", marker="braille")
             
             # Reduce the number of x-axis ticks to avoid clutter
             num_ticks = 5
