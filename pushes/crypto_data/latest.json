@@ -1,0 +1,39 @@
+{
+  "crypto_prices": {
+    "BTC": {
+      "price_usd": 107577,
+      "market_cap": 2138854581920.566,
+      "volume_24h": 21664051851.678677,
+      "change_24h": 0.09429486680400177,
+      "timestamp": "2025-06-30T16:51:20.298584"
+    },
+    "ETH": {
+      "price_usd": 2472.78,
+      "market_cap": 298367021645.9809,
+      "volume_24h": 13668554939.296658,
+      "change_24h": 1.5955226398565752,
+      "timestamp": "2025-06-30T16:51:20.298605"
+    },
+    "SOL": {
+      "price_usd": 157.02,
+      "market_cap": 83969568910.42987,
+      "volume_24h": 5491876343.037946,
+      "change_24h": 4.610316447991306,
+      "timestamp": "2025-06-30T16:51:20.298612"
+    }
+  },
+  "hash_rates": {
+    "BTC": {
+      "hash_rate_th_s": 0.9476883843811715,
+      "difficulty": 116958512019762,
+      "timestamp": "2025-06-30T16:51:20.456445"
+    }
+  },
+  "fear_greed_index": {
+    "value": 66,
+    "value_classification": "Greed",
+    "timestamp": "2025-06-30T16:51:20.626334"
+  },
+  "timestamp": "2025-06-30T16:51:20.627166",
+  "data_type": "crypto"
+}

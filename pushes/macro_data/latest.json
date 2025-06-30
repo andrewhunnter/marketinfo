@@ -1,0 +1,77 @@
+{
+  "market_indices": {
+    "sp500": {
+      "price": 616.905029296875,
+      "open": 617.3800048828125,
+      "high": 617.4299926757812,
+      "low": 615.68798828125,
+      "volume": 30700125,
+      "change": -0.4749755859375,
+      "change_percent": -0.07693407337149785,
+      "timestamp": "2025-06-30T16:51:34.985753",
+      "polygon_price": 614.91,
+      "polygon_volume": 86258398.0,
+      "polygon_high": 616.39,
+      "polygon_low": 610.83
+    },
+    "nasdaq100": {
+      "price": 550.7999877929688,
+      "open": 551.260009765625,
+      "high": 551.3099975585938,
+      "low": 549.010009765625,
+      "volume": 19807746,
+      "change": -0.46002197265625,
+      "change_percent": -0.08344918269181797,
+      "timestamp": "2025-06-30T16:51:35.676203",
+      "polygon_price": 548.09,
+      "polygon_volume": 57577147.0,
+      "polygon_high": 549.99,
+      "polygon_low": 544.545
+    }
+  },
+  "interest_rates": {
+    "us10yr": {
+      "yield_percent": 4.252999782562256,
+      "change": 0.0,
+      "timestamp": "2025-06-30T16:51:37.567729"
+    },
+    "fed_funds_rate": {
+      "rate_percent": 0.8,
+      "date": "1954-07-01",
+      "timestamp": "2025-06-30T16:51:38.061318",
+      "source": "FRED"
+    }
+  },
+  "consumer_data": {
+    "cpi": {
+      "value": 23.68,
+      "change_mom": 1.153353267834257,
+      "change_yoy": 10.24208566108007,
+      "date": "1948-01-01",
+      "timestamp": "2025-06-30T16:51:38.339691",
+      "source": "FRED"
+    },
+    "retail_sales": {
+      "value": 169500.0,
+      "change_mom": 1.0787698803155803,
+      "change_yoy": 6.485233419401045,
+      "date": "1993-01-01",
+      "timestamp": "2025-06-30T16:51:38.566652",
+      "source": "FRED"
+    },
+    "unemployment_rate": {
+      "rate_percent": 3.4,
+      "date": "1948-01-01",
+      "timestamp": "2025-06-30T16:51:38.735073",
+      "source": "FRED"
+    },
+    "inflation_rate": {
+      "rate_percent": 1.45797598627791,
+      "date": "1960-01-01",
+      "timestamp": "2025-06-30T16:51:38.903386",
+      "source": "FRED"
+    }
+  },
+  "timestamp": "2025-06-30T16:51:38.903702",
+  "data_type": "macro"
+}
