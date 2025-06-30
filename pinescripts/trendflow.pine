@@ -1,0 +1,16 @@
+//@version=6
+indicator("SOL Trend + Volume Spike", overlay=true)
+
+// === Trend Detector ===
+ma = ta.sma(close, 20)
+uptrend = close > ma
+bgcolor(uptrend ? color.new(color.green, 85) : color.new(color.red, 85))
+plot(ma, color=color.white, title="SMA")
+
+// === Trend Flip Dots ===
+trendUp = ta.crossover(close, ma)
+trendDown = ta.crossunder(close, ma)
+
+plotshape(trendUp, title="Start of Uptrend", location=location.belowbar, style=shape.circle, size=size.small, color=color.green)
+plotshape(trendDown, title="Start of Downtrend", location=location.abovebar, style=shape.circle, size=size.small, color=color.red)
+
