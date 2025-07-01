@@ -1,25 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 interface CryptoData {
   crypto_prices: {
@@ -60,7 +41,7 @@ export default function CryptoPricesChart() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-48">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-400"></div>
       </div>
     );
@@ -68,9 +49,9 @@ export default function CryptoPricesChart() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-48">
         <div className="text-red-400 text-center">
-          <p className="font-medium">Error loading chart</p>
+          <p className="font-medium">Error loading prices</p>
           <p className="text-sm text-gray-400">{error}</p>
         </div>
       </div>
@@ -79,93 +60,80 @@ export default function CryptoPricesChart() {
 
   if (!data || !data.crypto_prices) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-48">
         <p className="text-gray-400">No crypto price data available</p>
       </div>
     );
   }
 
-  const cryptos = ['BTC', 'ETH', 'SOL'];
-  const prices = cryptos.map(crypto => data.crypto_prices[crypto]?.price_usd || 0);
+  const cryptos = [
+    { symbol: 'BTC', name: 'Bitcoin', color: 'text-orange-400' },
+    { symbol: 'ETH', name: 'Ethereum', color: 'text-purple-400' },
+    { symbol: 'SOL', name: 'Solana', color: 'text-green-400' }
+  ];
 
-  const chartData = {
-    labels: cryptos,
-    datasets: [
-      {
-        label: 'Price (USD)',
-        data: prices,
-        backgroundColor: [
-          'rgba(251, 146, 60, 0.8)', // orange for BTC
-          'rgba(139, 92, 246, 0.8)', // purple for ETH
-          'rgba(34, 197, 94, 0.8)',  // green for SOL
-        ],
-        borderColor: [
-          'rgb(251, 146, 60)',
-          'rgb(139, 92, 246)',
-          'rgb(34, 197, 94)',
-        ],
-        borderWidth: 2,
-      },
-    ],
+  const formatPrice = (price: number) => {
+    if (price >= 1000) {
+      return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    } else {
+      return `$${price.toFixed(2)}`;
+    }
   };
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top' as const,
-        labels: {
-          color: 'rgb(209, 213, 219)',
-          font: {
-            size: 12,
-          },
-        },
-      },
-      title: {
-        display: true,
-        text: 'Crypto Prices (USD)',
-        color: 'rgb(249, 250, 251)',
-        font: {
-          size: 16,
-          weight: 'bold' as const,
-        },
-      },
-      tooltip: {
-        callbacks: {
-          label: function(context: any) {
-            return `${context.dataset.label}: $${context.parsed.y.toLocaleString()}`;
-          }
-        }
-      }
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        grid: {
-          color: 'rgba(139, 92, 246, 0.2)',
-        },
-        ticks: {
-          color: 'rgb(156, 163, 175)',
-          callback: function(value: any) {
-            return '$' + value.toLocaleString();
-          }
-        },
-      },
-      x: {
-        grid: {
-          color: 'rgba(139, 92, 246, 0.2)',
-        },
-        ticks: {
-          color: 'rgb(156, 163, 175)',
-        },
-      },
-    },
+  const getChangeColor = (change: number) => {
+    return change >= 0 ? 'text-green-400' : 'text-red-400';
+  };
+
+  const getArrow = (change: number) => {
+    return change >= 0 ? '↗' : '↘';
   };
 
   return (
-    <div className="h-64 md:h-80">
-      <Bar data={chartData} options={options} />
+    <div className="space-y-3">
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-center text-white">
+          Crypto Prices (USD)
+        </h3>
+        
+        <div className="space-y-3">
+          {cryptos.map(crypto => {
+            const cryptoData = data.crypto_prices[crypto.symbol];
+            if (!cryptoData) return null;
+
+            const change = cryptoData.change_24h;
+            const changeColor = getChangeColor(change);
+            const arrow = getArrow(change);
+
+            return (
+              <div key={crypto.symbol} className="flex items-center justify-between p-3 bg-black/30 rounded-lg border border-gray-700/50 hover:border-gray-600/50 transition-colors">
+                <div className="flex items-center space-x-3">
+                  <div className={`text-lg font-bold ${crypto.color}`}>
+                    {crypto.symbol}
+                  </div>
+                  <div className="text-sm text-gray-400">
+                    {crypto.name}
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <div className="text-lg font-semibold text-white">
+                    {formatPrice(cryptoData.price_usd)}
+                  </div>
+                  <div className={`flex items-center space-x-1 ${changeColor} text-sm font-medium`}>
+                    <span className="text-lg">{arrow}</span>
+                    <span>{Math.abs(change).toFixed(2)}%</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      
+      <div className="text-xs text-gray-400 px-2">
+        <p className="font-medium text-gray-300 mb-1">Current Cryptocurrency Prices</p>
+        <p>Real-time USD prices with 24h change indicators. Green arrows show gains, red arrows show losses.</p>
+      </div>
     </div>
   );
 } 

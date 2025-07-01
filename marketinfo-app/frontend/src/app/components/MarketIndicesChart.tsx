@@ -213,8 +213,14 @@ export default function MarketIndicesChart() {
   };
 
   return (
-    <div className="h-64 md:h-80">
-      <Bar data={chartData} options={options} />
+    <div className="space-y-3">
+      <div className="h-48 md:h-56">
+        <Bar data={chartData} options={options} />
+      </div>
+      <div className="text-xs text-gray-400 px-2">
+        <p className="font-medium text-gray-300 mb-1">Major Market Indices Overview</p>
+        <p>Current values and daily changes for key market indices. Shows overall market performance and trends.</p>
+      </div>
     </div>
   );
 } 

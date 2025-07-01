@@ -167,8 +167,14 @@ export default function VolumeChart() {
   };
 
   return (
-    <div className="h-64 md:h-80">
-      <Bar data={chartData} options={options} />
+    <div className="space-y-3">
+      <div className="h-48 md:h-56">
+        <Bar data={chartData} options={options} />
+      </div>
+      <div className="text-xs text-gray-400 px-2">
+        <p className="font-medium text-gray-300 mb-1">24-Hour Trading Volume</p>
+        <p>Total USD value traded in the last 24 hours. Higher volume indicates more market activity and liquidity.</p>
+      </div>
     </div>
   );
 } 

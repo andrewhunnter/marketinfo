@@ -153,13 +153,19 @@ export default function FearGreedChart() {
   };
 
   return (
-    <div className="h-64 md:h-80 flex flex-col items-center">
-      <div className="flex-1 w-full">
-        <Doughnut data={chartData} options={options} />
+    <div className="space-y-3">
+      <div className="h-48 md:h-56 flex flex-col items-center">
+        <div className="flex-1 w-full">
+          <Doughnut data={chartData} options={options} />
+        </div>
+        <div className="text-center mt-2">
+          <div className="text-xl font-bold text-white">{value}</div>
+          <div className="text-xs text-gray-400">{fearGreedData.value_classification}</div>
+        </div>
       </div>
-      <div className="text-center mt-2">
-        <div className="text-2xl font-bold text-white">{value}</div>
-        <div className="text-sm text-gray-400">{fearGreedData.value_classification}</div>
+      <div className="text-xs text-gray-400 px-2">
+        <p className="font-medium text-gray-300 mb-1">Crypto Fear & Greed Index</p>
+        <p>Measures market sentiment from 0 (extreme fear) to 100 (extreme greed). Helps identify buying/selling opportunities.</p>
       </div>
     </div>
   );

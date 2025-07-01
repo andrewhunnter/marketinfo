@@ -164,8 +164,14 @@ export default function MoMYoYChart() {
   };
 
   return (
-    <div className="h-64 md:h-80">
-      <Bar data={chartData} options={options} />
+    <div className="space-y-3">
+      <div className="h-48 md:h-56">
+        <Bar data={chartData} options={options} />
+      </div>
+      <div className="text-xs text-gray-400 px-2">
+        <p className="font-medium text-gray-300 mb-1">Month-over-Month vs Year-over-Year</p>
+        <p>Compares short-term (MoM) vs long-term (YoY) trends for CPI and retail sales. Shows momentum changes.</p>
+      </div>
     </div>
   );
 } 

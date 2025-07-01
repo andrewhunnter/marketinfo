@@ -167,7 +167,7 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
   };
 
   return (
-    <div className="h-64 md:h-80">
+    <div className="h-48 md:h-56">
       <Line data={chartData} options={options} />
     </div>
   );
