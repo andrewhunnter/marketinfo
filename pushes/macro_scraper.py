@@ -43,27 +43,62 @@ class MacroScraper:
             self.fred = None
     
     def get_market_indices(self):
-        """Fetch market indices data using yfinance and Polygon.io"""
+        """Fetch market indices data using yfinance - specifically SPY and QQQ"""
         try:
             market_data = {}
             
-            # Using yfinance for market indices
-            for name, symbol in self.config.STOCK_INDICES.items():
+            # Force use of SPY and QQQ regardless of config
+            indices_to_fetch = {
+                'sp500': 'SPY',     # S&P 500 ETF
+                'nasdaq100': 'QQQ', # NASDAQ 100 ETF
+                'vix': '^VIX'       # VIX Volatility Index
+            }
+            
+            logger.info("Fetching market indices: SPY, QQQ, and VIX")
+            
+            for name, symbol in indices_to_fetch.items():
                 try:
+                    logger.info(f"Fetching data for {name} ({symbol})")
                     ticker = yf.Ticker(symbol)
-                    hist = ticker.history(period="1d")
+                    hist = ticker.history(period="5d")  # Get 5 days to ensure we have data
                     
                     if not hist.empty:
                         latest = hist.iloc[-1]
+                        previous = hist.iloc[-2] if len(hist) > 1 else latest
+                        
+                        # Calculate proper change from previous close
+                        change = float(latest['Close'] - previous['Close'])
+                        change_percent = float((change / previous['Close']) * 100)
+                        
                         market_data[name] = {
+                            'symbol': symbol,
                             'price': float(latest['Close']),
                             'open': float(latest['Open']),
                             'high': float(latest['High']),
                             'low': float(latest['Low']),
-                            'volume': int(latest['Volume']),
-                            'change': float(latest['Close'] - latest['Open']),
-                            'change_percent': float((latest['Close'] - latest['Open']) / latest['Open'] * 100),
-                            'timestamp': datetime.utcnow().isoformat()
+                            'volume': int(latest['Volume']) if latest['Volume'] > 0 else 0,
+                            'change': change,
+                            'change_percent': change_percent,
+                            'previous_close': float(previous['Close']),
+                            'timestamp': datetime.utcnow().isoformat(),
+                            'data_date': hist.index[-1].strftime('%Y-%m-%d')
+                        }
+                        
+                        logger.info(f"Successfully fetched {symbol}: ${latest['Close']:.2f} ({change_percent:+.2f}%)")
+                    else:
+                        logger.warning(f"No data returned for {symbol}")
+                        market_data[name] = {
+                            'symbol': symbol,
+                            'price': 0,
+                            'open': 0,
+                            'high': 0,
+                            'low': 0,
+                            'volume': 0,
+                            'change': 0,
+                            'change_percent': 0,
+                            'previous_close': 0,
+                            'timestamp': datetime.utcnow().isoformat(),
+                            'error': 'No data available'
                         }
                     
                     time.sleep(0.5)  # Rate limiting
@@ -71,6 +106,7 @@ class MacroScraper:
                 except Exception as e:
                     logger.error(f"Error fetching {symbol}: {e}")
                     market_data[name] = {
+                        'symbol': symbol,
                         'price': 0,
                         'open': 0,
                         'high': 0,
@@ -78,6 +114,7 @@ class MacroScraper:
                         'volume': 0,
                         'change': 0,
                         'change_percent': 0,
+                        'previous_close': 0,
                         'timestamp': datetime.utcnow().isoformat(),
                         'error': str(e)
                     }
@@ -94,28 +131,55 @@ class MacroScraper:
             return {}
     
     def _enhance_with_polygon_data(self, market_data):
-        """Enhance market data with Polygon.io data"""
+        """Enhance market data with Polygon.io data for SPY and QQQ"""
         try:
-            # Get additional data from Polygon.io for more accurate real-time data
+            # Get additional data from Polygon.io for SPY and QQQ
             polygon_symbols = {'sp500': 'SPY', 'nasdaq100': 'QQQ'}
+            
+            logger.info("Enhancing data with Polygon.io API")
             
             for name, symbol in polygon_symbols.items():
                 try:
                     url = f"{self.config.POLYGON_BASE_URL}/v2/aggs/ticker/{symbol}/prev"
                     params = {'apikey': self.config.POLYGON_API_KEY}
                     
-                    response = requests.get(url, params=params)
+                    response = requests.get(url, params=params, timeout=10)
                     if response.status_code == 200:
                         data = response.json()
-                        if data.get('results'):
+                        if data.get('results') and len(data['results']) > 0:
                             result = data['results'][0]
                             if name in market_data:
+                                # Update with Polygon data if available
+                                polygon_close = result.get('c')
+                                polygon_open = result.get('o')
+                                
                                 market_data[name].update({
-                                    'polygon_price': result.get('c'),
+                                    'polygon_close': polygon_close,
+                                    'polygon_open': polygon_open,
                                     'polygon_volume': result.get('v'),
                                     'polygon_high': result.get('h'),
-                                    'polygon_low': result.get('l')
+                                    'polygon_low': result.get('l'),
+                                    'polygon_timestamp': result.get('t')
                                 })
+                                
+                                # Use Polygon data as primary if available and recent
+                                if polygon_close and polygon_open:
+                                    market_data[name]['price'] = float(polygon_close)
+                                    market_data[name]['open'] = float(polygon_open)
+                                    market_data[name]['high'] = float(result.get('h', market_data[name]['high']))
+                                    market_data[name]['low'] = float(result.get('l', market_data[name]['low']))
+                                    market_data[name]['volume'] = int(result.get('v', market_data[name]['volume']))
+                                    
+                                    # Recalculate change with Polygon data
+                                    if 'previous_close' in market_data[name]:
+                                        change = polygon_close - market_data[name]['previous_close']
+                                        change_percent = (change / market_data[name]['previous_close']) * 100
+                                        market_data[name]['change'] = float(change)
+                                        market_data[name]['change_percent'] = float(change_percent)
+                                
+                                logger.info(f"Enhanced {symbol} with Polygon data")
+                    else:
+                        logger.warning(f"Polygon API returned status {response.status_code} for {symbol}")
                     
                     time.sleep(0.2)  # Rate limiting for Polygon
                     

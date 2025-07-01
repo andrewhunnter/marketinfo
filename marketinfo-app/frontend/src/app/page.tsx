@@ -22,6 +22,7 @@ import RetailSalesChart from './components/RetailSalesChart';
 import MoMYoYChart from './components/MoMYoYChart';
 import UnemploymentChart from './components/UnemploymentChart';
 import CryptoMarketCapPieChart from './components/CryptoMarketCapPieChart';
+import CombinedIndicesChart from './components/CombinedIndicesChart';
 
 export default function Dashboard() {
   const [selectedSymbol, setSelectedSymbol] = useState<string>('BTC');
@@ -53,7 +54,7 @@ export default function Dashboard() {
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">
-                MarketInfo Dashboard
+                marketinfo
               </h1>
             </div>
             <div className="flex items-center space-x-4">
@@ -68,18 +69,58 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Economic Calendar & Market Overview Section - 3 Column Layout */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-white mb-8">
+            main indicators...
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Economic Calendar */}
+            <div className="lg:col-span-1 bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent mb-4">
+                📅 Economic Events
+              </h3>
+              <EconomicCalendar />
+            </div>
+
+            {/* Crypto Snapshot */}
+            <div className="lg:col-span-1 bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-orange-500/20 p-6 hover:border-orange-500/40 transition-all duration-300">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-orange-300 to-pink-300 bg-clip-text text-transparent mb-4">
+                ₿ Crypto Snapshot
+              </h3>
+              <div className="space-y-6">
+                <div className="pb-4 border-b border-orange-500/20">
+                  <CryptoPricesChart />
+                </div>
+                <div className="pb-4 border-b border-orange-500/20">
+                  <CryptoMarketCapPieChart />
+                </div>
+                <div>
+                  <VolumeChart />
+                </div>
+              </div>
+            </div>
+
+            {/* Market Indices */}
+            <div className="lg:col-span-1 bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-blue-500/20 p-6 hover:border-blue-500/40 transition-all duration-300">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
+                📈 Market Indices
+              </h3>
+              <div className="space-y-4">
+                <CombinedIndicesChart />
+                <SP500Chart />
+                <NASDAQChart />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Crypto Section */}
         <section className="mb-12">
-                      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-orange-400 to-pink-400 bg-clip-text text-transparent mb-8">
-              web-3 dashboard
-            </h2>
+          <h2 className="text-3xl font-bold text-white mb-8">
+            web-3 dashboard
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <CryptoPricesChart />
-            </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <CryptoMarketCapPieChart />
-            </div>
             <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-semibold text-white">
@@ -98,9 +139,6 @@ export default function Dashboard() {
               <CryptoChart symbol={selectedSymbol} />
             </div>
             <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <VolumeChart />
-            </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
               <ChangeChart />
             </div>
             <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
@@ -109,23 +147,7 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Market Indices Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-green-400 bg-clip-text text-transparent mb-8">
-            Market Indices
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 p-6 hover:border-white/40 transition-all duration-300">
-              <SP500Chart />
-            </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 p-6 hover:border-white/40 transition-all duration-300">
-              <NASDAQChart />
-            </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 p-6 hover:border-white/40 transition-all duration-300">
-              <MarketIndicesChart />
-            </div>
-          </div>
-        </section>
+
 
         {/* Economic Data Section */}
         <section className="mb-12">
@@ -151,35 +173,24 @@ export default function Dashboard() {
           </div>
         </section>
 
-        {/* Legacy Components Section */}
+        {/* Data Overview Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-green-400 via-white to-red-400 bg-clip-text text-transparent mb-8">
-            news releases + data overview
+          <h2 className="text-3xl font-bold text-white mb-8">
+            Data Overview
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Economic Calendar */}
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-gray-500/40 transition-all duration-300">
-              <h3 className="text-xl font-semibold bg-gradient-to-r from-white to-red-300 bg-clip-text text-transparent mb-6">
-                Economic Calendar
+            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent mb-4">
+                Data Overview
               </h3>
-              <EconomicCalendar />
+              <DataOverview />
             </div>
 
-            {/* Data Overview & Push Data */}
-            <div className="space-y-6">
-              <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-                <h3 className="text-lg font-semibold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent mb-4">
-                  Data Overview
-                </h3>
-                <DataOverview />
-              </div>
-
-              <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
-                <h3 className="text-lg font-semibold bg-gradient-to-r from-red-300 to-white bg-clip-text text-transparent mb-4">
-                  Latest Push Data
-                </h3>
-                <PushData />
-              </div>
+            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
+              <h3 className="text-lg font-semibold bg-gradient-to-r from-red-300 to-white bg-clip-text text-transparent mb-4">
+                Latest Push Data
+              </h3>
+              <PushData />
             </div>
           </div>
         </section>
