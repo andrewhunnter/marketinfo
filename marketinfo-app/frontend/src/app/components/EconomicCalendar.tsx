@@ -3,13 +3,29 @@
 import { useEffect, useState } from 'react';
 
 interface EconomicEvent {
-  [key: string]: any;
+  date: string;
+  release_id: number;
+  name: string;
+  press_release: boolean;
+  link: string;
+  notes: string;
 }
 
+interface EconomicCalendarData {
+  updated_at: string;
+  events_count: number;
+  new_events_count: number;
+  cached_events_count: number;
+  events: EconomicEvent[];
+}
+
+type SortOrder = 'newest' | 'oldest';
+
 export default function EconomicCalendar() {
-  const [events, setEvents] = useState<EconomicEvent[]>([]);
+  const [calendarData, setCalendarData] = useState<EconomicCalendarData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<SortOrder>('newest');
 
   useEffect(() => {
     fetch('http://localhost:5001/api/calendar/economic')
@@ -18,9 +34,7 @@ export default function EconomicCalendar() {
         if (data.error) {
           setError(data.error);
         } else {
-          // Handle both array and object responses
-          const eventsData = Array.isArray(data) ? data : data.events || [data];
-          setEvents(eventsData.slice(0, 12)); // Show more events for better fill
+          setCalendarData(data);
         }
       })
       .catch(err => {
@@ -32,151 +46,246 @@ export default function EconomicCalendar() {
 
   if (loading) {
     return (
-      <div className="space-y-3 h-full">
-        {[...Array(8)].map((_, i) => (
-          <div key={i} className="animate-pulse">
-            <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
-            <div className="h-3 bg-gray-700 rounded w-1/2"></div>
-          </div>
-        ))}
+      <div className="h-96 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-red-400 text-sm h-full flex items-center justify-center">
-        <div className="text-center">
+      <div className="h-96 flex items-center justify-center">
+        <div className="text-red-400 text-center">
           <p className="font-medium">Error loading calendar</p>
-          <p className="text-gray-400">{error}</p>
+          <p className="text-sm text-gray-400">{error}</p>
         </div>
       </div>
     );
   }
 
-  if (!events || events.length === 0) {
+  if (!calendarData || !calendarData.events || calendarData.events.length === 0) {
     return (
-      <div className="text-gray-400 text-sm h-full flex items-center justify-center">
-        No economic events available
+      <div className="h-96 flex items-center justify-center">
+        <p className="text-gray-400">No economic events available</p>
       </div>
     );
   }
 
   const formatDate = (dateString: string) => {
     try {
-      return new Date(dateString).toLocaleDateString();
+      const [year, month, day] = dateString.split('-').map(Number);
+      const date = new Date(year, month - 1, day);
+      
+      return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric'
+      });
     } catch {
       return dateString;
     }
   };
 
-  const getImpactColor = (impact: string) => {
-    const impactLower = impact?.toLowerCase() || '';
-    if (impactLower.includes('high')) return 'text-red-300 bg-red-500/20 border-red-500/30';
-    if (impactLower.includes('medium')) return 'text-yellow-300 bg-yellow-500/20 border-yellow-500/30';
-    if (impactLower.includes('low')) return 'text-green-300 bg-green-500/20 border-green-500/30';
-    return 'text-gray-300 bg-gray-500/20 border-gray-500/30';
+  const parseLocalDate = (dateString: string) => {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  };
+
+  // Sort events based on selected order
+  const sortedEvents = [...calendarData.events].sort((a, b) => {
+    const dateA = parseLocalDate(a.date).getTime();
+    const dateB = parseLocalDate(b.date).getTime();
+    
+    return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+  });
+
+  const getDateColor = (dateString: string) => {
+    try {
+      const eventDate = parseLocalDate(dateString);
+      const today = new Date();
+      
+      eventDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      
+      const diffTime = eventDate.getTime() - today.getTime();
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      
+      if (diffDays < 0) return 'text-gray-400';
+      if (diffDays === 0) return 'text-yellow-400';
+      if (diffDays <= 7) return 'text-blue-400';
+      return 'text-gray-300';
+    } catch {
+      return 'text-gray-400';
+    }
+  };
+
+  const handleSortChange = (newSortOrder: SortOrder) => {
+    console.log('handleSortChange called with:', newSortOrder);
+    console.log('Current sortOrder:', sortOrder);
+    setSortOrder(newSortOrder);
+    console.log('setSortOrder called');
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="space-y-4" style={{ pointerEvents: 'auto', position: 'relative', zIndex: 10 }}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 flex-shrink-0">
-        <p className="text-sm text-gray-400">
-          {events.length} upcoming events
-        </p>
-        <div className="text-xs text-gray-500">↕ Scroll to see more</div>
+      <div className="flex items-center justify-between" style={{ pointerEvents: 'auto', position: 'relative', zIndex: 20 }}>
+        <div>
+          <h3 className="text-lg font-semibold text-white">Economic Calendar</h3>
+          <p className="text-xs text-gray-400">{calendarData.events_count} releases</p>
+        </div>
+        
+        {/* Sort Tags */}
+        <div className="flex items-center space-x-2 relative z-50">
+          <button
+            type="button"
+            onMouseDown={(e) => {
+              console.log('Mouse down on newest button');
+              e.preventDefault();
+            }}
+            onMouseUp={(e) => {
+              console.log('Mouse up on newest button');
+              e.preventDefault();
+            }}
+            onClick={(e) => {
+              console.log('NEWEST BUTTON CLICKED - This should appear!');
+              e.preventDefault();
+              e.stopPropagation();
+              handleSortChange('newest');
+            }}
+            style={{
+              pointerEvents: 'auto',
+              zIndex: 1000,
+              position: 'relative'
+            }}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer select-none relative z-50 ${
+              sortOrder === 'newest'
+                ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
+                : 'bg-gray-700/50 text-gray-400 border border-gray-600/30 hover:bg-gray-600/50 hover:text-gray-300'
+            }`}
+          >
+            Most Recent
+          </button>
+          <button
+            type="button"
+            onMouseDown={(e) => {
+              console.log('Mouse down on oldest button');
+              e.preventDefault();
+            }}
+            onMouseUp={(e) => {
+              console.log('Mouse up on oldest button');
+              e.preventDefault();
+            }}
+            onClick={(e) => {
+              console.log('OLDEST BUTTON CLICKED - This should appear!');
+              e.preventDefault();
+              e.stopPropagation();
+              handleSortChange('oldest');
+            }}
+            style={{
+              pointerEvents: 'auto',
+              zIndex: 1000,
+              position: 'relative'
+            }}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer select-none relative z-50 ${
+              sortOrder === 'oldest'
+                ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40'
+                : 'bg-gray-700/50 text-gray-400 border border-gray-600/30 hover:bg-gray-600/50 hover:text-gray-300'
+            }`}
+          >
+            Oldest First
+          </button>
+        </div>
       </div>
-      
-      {/* Vertical scrollable container - fills remaining space */}
-      <div className="flex-1 space-y-3 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-500 min-h-0">
-        {events.map((event, index) => {
-          // Try to extract common fields, handling various possible field names
-          const title = event.title || event.event || event.name || event.description || 'Economic Event';
-          const date = event.date || event.time || event.datetime || event.timestamp;
-          const impact = event.impact || event.importance || event.priority || '';
-          const country = event.country || event.region || '';
-          const actual = event.actual || event.actualValue || '';
-          const forecast = event.forecast || event.forecastValue || event.expected || '';
-          const link = event.link || event.url || '';
-          const notes = event.notes || event.description || '';
 
-          return (
-            <div key={index} className="bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-gray-600/30 hover:border-green-500/50 hover:bg-black/40 transition-all duration-200 flex-shrink-0">
-              {/* Header with impact and date */}
-              <div className="flex items-start justify-between mb-2">
-                <div className="flex-1">
-                  {date && (
-                    <p className="text-xs text-orange-300 font-medium mb-1">
-                      {formatDate(date)}
-                    </p>
-                  )}
-                  {country && (
-                    <p className="text-xs text-purple-300 font-medium">
-                      {country}
-                    </p>
-                  )}
+      {/* Scrollable Calendar Container */}
+      <div className="h-96 relative">
+        <div 
+          className="h-full overflow-y-auto bg-black/20 rounded-lg border border-gray-700/50 custom-scrollbar"
+          style={{
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#4b5563 #1f2937'
+          }}
+        >
+          <div className="p-4 space-y-2">
+            {sortedEvents.map((event, index) => (
+              <div 
+                key={`${event.release_id}-${index}`} 
+                className="group bg-gray-800/30 hover:bg-gray-700/40 rounded-lg p-3 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-200"
+              >
+                {/* Main Content Row */}
+                <div className="flex items-center justify-between">
+                  {/* Left: Date and Name */}
+                  <div className="flex items-center space-x-3 flex-1 min-w-0">
+                    <div className={`text-xs font-medium ${getDateColor(event.date)} bg-gray-700/50 px-2 py-1 rounded flex-shrink-0`}>
+                      {formatDate(event.date)}
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      {event.link ? (
+                        <a 
+                          href={event.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-sm text-blue-300 hover:text-blue-200 underline decoration-blue-400/50 hover:decoration-blue-300 transition-colors truncate block"
+                          title={event.name}
+                        >
+                          {event.name}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-gray-200 truncate" title={event.name}>
+                          {event.name}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right: Indicators */}
+                  <div className="flex items-center space-x-2 flex-shrink-0">
+                    {event.press_release && (
+                      <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded border border-blue-500/30">
+                        Press
+                      </span>
+                    )}
+                    {event.link && (
+                      <span className="text-gray-400 group-hover:text-gray-300">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
                 </div>
-                {impact && (
-                  <span className={`px-2 py-1 rounded text-xs font-medium border ${getImpactColor(impact)}`}>
-                    {impact}
-                  </span>
+
+                {/* Expandable Notes (if present) */}
+                {event.notes && (
+                  <details className="mt-2 group/details">
+                    <summary className="cursor-pointer text-xs text-gray-400 hover:text-gray-300 flex items-center space-x-1 select-none">
+                      <span className="group-open/details:rotate-90 transition-transform">▶</span>
+                      <span>Details</span>
+                    </summary>
+                    <div className="mt-2 text-xs text-gray-400 leading-relaxed pl-4 max-h-20 overflow-y-auto custom-scrollbar">
+                      {event.notes}
+                    </div>
+                  </details>
                 )}
               </div>
-
-              {/* Event title with optional link */}
-              {link ? (
-                <a 
-                  href={link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="font-medium text-sm text-blue-300 hover:text-blue-200 mb-2 leading-tight block underline decoration-blue-400/50 hover:decoration-blue-300 transition-colors duration-200"
-                  title={`Click to view: ${title}`}
-                >
-                  {title} 🔗
-                </a>
-              ) : (
-                <h4 className="font-medium text-sm text-gray-100 mb-2 leading-tight">
-                  {title}
-                </h4>
-              )}
-
-              {/* Data values in a compact layout */}
-              {(actual || forecast) && (
-                <div className="space-y-1 mb-2">
-                  {actual && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-pink-300 font-medium">Actual:</span>
-                      <span className="text-xs text-gray-200">{actual}</span>
-                    </div>
-                  )}
-                  {forecast && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-indigo-300 font-medium">Forecast:</span>
-                      <span className="text-xs text-gray-200">{forecast}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* URL display */}
-              {link && (
-                <div className="mt-2 pt-2 border-t border-gray-600/30">
-                  <p className="text-xs text-gray-400 break-all">
-                    {link}
-                  </p>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-      
-      {events.length === 0 && (
-        <div className="text-center text-gray-400 py-8 flex-shrink-0">
-          <p>No economic events found</p>
+            ))}
+          </div>
         </div>
-      )}
+      </div>
+
+      {/* Footer Stats */}
+      <div className="flex items-center justify-between text-xs text-gray-400">
+        <div className="flex items-center space-x-3">
+          <span>📅 {calendarData.events_count} total</span>
+          {calendarData.new_events_count > 0 && (
+            <span className="text-green-400">✨ {calendarData.new_events_count} new</span>
+          )}
+        </div>
+        <div className="text-gray-500">
+          Updated: {new Date(calendarData.updated_at).toLocaleDateString()}
+        </div>
+      </div>
     </div>
   );
 } 

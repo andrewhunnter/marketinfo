@@ -1,6 +1,8 @@
 {
-  "updated_at": "2025-06-30T23:02:28.943931",
-  "events_count": 31,
+  "updated_at": "2025-07-01T06:57:52.778160",
+  "events_count": 33,
+  "new_events_count": 2,
+  "cached_events_count": 31,
   "events": [
     {
       "date": "2025-06-30",
@@ -249,6 +251,22 @@
       "press_release": true,
       "link": "https://www.bea.gov/data/intl-trade-investment/international-investment-position",
       "notes": ""
+    },
+    {
+      "date": "2025-07-01",
+      "release_id": 502,
+      "name": "Euro Short Term Rate",
+      "press_release": true,
+      "link": "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html",
+      "notes": "The euro short-term rate (\u20acSTR) reflects the wholesale euro unsecured overnight borrowing costs of banks located in the euro area. The \u20acSTR is published on each TARGET2 business day based on transactions conducted and settled on the previous TARGET2 business day (the reporting date \u201cT\u201d) with a maturity date of T+1 which are deemed to have been executed at arm\u2019s length and thus reflect market rates in an unbiased way."
+    },
+    {
+      "date": "2025-07-01",
+      "release_id": 492,
+      "name": "SONIA Interest Rate Benchmark",
+      "press_release": true,
+      "link": "https://www.bankofengland.co.uk/markets/sonia-benchmark",
+      "notes": "SONIA is a measure of the rate at which interest is paid on sterling short-term wholesale funds in circumstances where credit, liquidity and other risks are minimal.\r\n\r\nOn each London business day, SONIA is measured as the trimmed mean, rounded to four decimal places, of interest rates paid on eligible sterling denominated deposit transactions. \r\n\r\nThe trimmed mean is calculated as the volume-weighted mean rate, based on the central 50 per cent of the volume-weighted distribution of rates."
     }
   ]
 }

@@ -28,6 +28,11 @@ export default function Dashboard() {
   const [selectedSymbol, setSelectedSymbol] = useState<string>('BTC');
   const [availableSymbols, setAvailableSymbols] = useState<string[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     // Fetch available symbols
@@ -51,19 +56,21 @@ export default function Dashboard() {
       <div className="fixed inset-0 bg-gradient-to-br from-black via-slate-900 to-black">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-amber-900/20 via-transparent to-transparent"></div>
-        <div className="particles">
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 20}s`,
-                animationDuration: `${15 + Math.random() * 10}s`
-              }}
-            ></div>
-          ))}
-        </div>
+        {isMounted && (
+          <div className="particles">
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={i}
+                className="particle"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 20}s`,
+                  animationDuration: `${15 + Math.random() * 10}s`
+                }}
+              ></div>
+            ))}
+          </div>
+        )}
       </div>
       
       {/* Header */}
@@ -82,7 +89,7 @@ export default function Dashboard() {
                 <h1 className="text-5xl font-black bg-gradient-to-r from-purple-400 via-amber-400 to-pink-400 bg-clip-text text-transparent neon-text">
                   marketinfo
                 </h1>
-                <p className="text-gray-400 text-sm font-medium">Scraped financial data intelligence platform</p>
+                <p className="text-gray-400 text-sm font-medium">personal dashboard for market analysis</p>
               </div>
             </div>
             <div className="flex items-center space-x-6">
