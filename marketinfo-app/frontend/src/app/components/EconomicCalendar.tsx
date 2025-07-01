@@ -20,7 +20,7 @@ export default function EconomicCalendar() {
         } else {
           // Handle both array and object responses
           const eventsData = Array.isArray(data) ? data : data.events || [data];
-          setEvents(eventsData.slice(0, 8)); // Limit events for column layout
+          setEvents(eventsData.slice(0, 12)); // Show more events for better fill
         }
       })
       .catch(err => {
@@ -32,8 +32,8 @@ export default function EconomicCalendar() {
 
   if (loading) {
     return (
-      <div className="space-y-3">
-        {[...Array(5)].map((_, i) => (
+      <div className="space-y-3 h-full">
+        {[...Array(8)].map((_, i) => (
           <div key={i} className="animate-pulse">
             <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
             <div className="h-3 bg-gray-700 rounded w-1/2"></div>
@@ -45,15 +45,21 @@ export default function EconomicCalendar() {
 
   if (error) {
     return (
-      <div className="text-red-400 text-sm">
-        <p className="font-medium">Error loading calendar</p>
-        <p className="text-gray-400">{error}</p>
+      <div className="text-red-400 text-sm h-full flex items-center justify-center">
+        <div className="text-center">
+          <p className="font-medium">Error loading calendar</p>
+          <p className="text-gray-400">{error}</p>
+        </div>
       </div>
     );
   }
 
   if (!events || events.length === 0) {
-    return <div className="text-gray-400 text-sm">No economic events available</div>;
+    return (
+      <div className="text-gray-400 text-sm h-full flex items-center justify-center">
+        No economic events available
+      </div>
+    );
   }
 
   const formatDate = (dateString: string) => {
@@ -73,17 +79,17 @@ export default function EconomicCalendar() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 flex-shrink-0">
         <p className="text-sm text-gray-400">
           {events.length} upcoming events
         </p>
         <div className="text-xs text-gray-500">↕ Scroll to see more</div>
       </div>
       
-      {/* Vertical scrollable container */}
-      <div className="space-y-3 max-h-96 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-500">
+      {/* Vertical scrollable container - fills remaining space */}
+      <div className="flex-1 space-y-3 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-500 min-h-0">
         {events.map((event, index) => {
           // Try to extract common fields, handling various possible field names
           const title = event.title || event.event || event.name || event.description || 'Economic Event';
@@ -96,7 +102,7 @@ export default function EconomicCalendar() {
           const notes = event.notes || event.description || '';
 
           return (
-            <div key={index} className="bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-gray-600/30 hover:border-green-500/50 hover:bg-black/40 transition-all duration-200">
+            <div key={index} className="bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-gray-600/30 hover:border-green-500/50 hover:bg-black/40 transition-all duration-200 flex-shrink-0">
               {/* Header with impact and date */}
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1">
@@ -167,7 +173,7 @@ export default function EconomicCalendar() {
       </div>
       
       {events.length === 0 && (
-        <div className="text-center text-gray-400 py-8">
+        <div className="text-center text-gray-400 py-8 flex-shrink-0">
           <p>No economic events found</p>
         </div>
       )}

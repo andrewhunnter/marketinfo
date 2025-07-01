@@ -42,7 +42,7 @@ interface MacroData {
   };
 }
 
-export default function NASDAQChart() {
+export default function QQQChart() {
   const [data, setData] = useState<MacroData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -70,7 +70,7 @@ export default function NASDAQChart() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-400"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-400"></div>
       </div>
     );
   }
@@ -79,7 +79,7 @@ export default function NASDAQChart() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-red-400 text-center">
-          <p className="font-medium">Error loading chart</p>
+          <p className="font-medium">Error loading QQQ chart</p>
           <p className="text-sm text-gray-400">{error}</p>
         </div>
       </div>
@@ -89,18 +89,26 @@ export default function NASDAQChart() {
   if (!data || !data.market_indices || !data.market_indices.nasdaq100) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-gray-400">No NASDAQ 100 data available</p>
+        <p className="text-gray-400">No QQQ data available</p>
       </div>
     );
   }
 
   const nasdaq100 = data.market_indices.nasdaq100;
-  
+  const currentPrice = nasdaq100.polygon_price || nasdaq100.price;
+  const change = nasdaq100.change_percent;
+  const changeColor = change >= 0 ? 'text-green-400' : 'text-red-400';
+  const arrow = change >= 0 ? '↗' : '↘';
+
+  const formatPrice = (price: number) => {
+    return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
   // Use polygon data for more accurate OHLC
   const ohlcData = [
     { label: 'Open', value: nasdaq100.open },
-    { label: 'High', value: Math.max(nasdaq100.polygon_high, nasdaq100.high) },
-    { label: 'Low', value: Math.min(nasdaq100.polygon_low, nasdaq100.low) },
+    { label: 'High', value: Math.max(nasdaq100.polygon_high || nasdaq100.high, nasdaq100.high) },
+    { label: 'Low', value: Math.min(nasdaq100.polygon_low || nasdaq100.low, nasdaq100.low) },
     { label: 'Close', value: nasdaq100.polygon_price || nasdaq100.price },
   ];
 
@@ -108,7 +116,7 @@ export default function NASDAQChart() {
     labels: ohlcData.map(item => item.label),
     datasets: [
       {
-        label: 'NASDAQ 100 OHLC',
+        label: '$QQQ OHLC',
         data: ohlcData.map(item => item.value),
         borderColor: 'rgb(139, 92, 246)',
         backgroundColor: 'rgba(139, 92, 246, 0.1)',
@@ -143,7 +151,7 @@ export default function NASDAQChart() {
       },
       title: {
         display: true,
-        text: 'NASDAQ 100 Price Range',
+        text: '$QQQ Price Range',
         color: 'rgb(249, 250, 251)',
         font: {
           size: 16,
@@ -183,13 +191,33 @@ export default function NASDAQChart() {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
+      {/* Clean ticker card */}
+      <div className="p-4 bg-purple-500/10 rounded-lg border border-purple-500/30">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="text-sm font-bold text-purple-400">$QQQ</div>
+            <div className="text-xs text-gray-400">Invesco QQQ</div>
+          </div>
+          <div className={`flex items-center space-x-1 ${changeColor} text-sm font-medium`}>
+            <span className="text-lg">{arrow}</span>
+            <span>{Math.abs(change).toFixed(2)}%</span>
+          </div>
+        </div>
+        
+        <div className="text-2xl font-bold text-white mt-2">
+          ${formatPrice(currentPrice)}
+        </div>
+      </div>
+
+      {/* OHLC Chart */}
       <div className="h-48 md:h-56">
         <Line data={chartData} options={options} />
       </div>
+      
       <div className="text-xs text-gray-400 px-2">
-        <p className="font-medium text-gray-300 mb-1">NASDAQ 100 OHLC Range</p>
-        <p>Open, High, Low, Close prices for tech-heavy NASDAQ 100. Tracks largest non-financial companies.</p>
+        <p className="font-medium text-gray-300 mb-1">Invesco QQQ Trust ETF OHLC</p>
+        <p>Open, High, Low, Close prices showing the day's trading range for QQQ.</p>
       </div>
     </div>
   );

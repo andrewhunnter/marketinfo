@@ -42,7 +42,7 @@ interface MacroData {
   };
 }
 
-export default function SP500Chart() {
+export default function SPYChart() {
   const [data, setData] = useState<MacroData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +79,7 @@ export default function SP500Chart() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-red-400 text-center">
-          <p className="font-medium">Error loading chart</p>
+          <p className="font-medium">Error loading SPY chart</p>
           <p className="text-sm text-gray-400">{error}</p>
         </div>
       </div>
@@ -89,18 +89,26 @@ export default function SP500Chart() {
   if (!data || !data.market_indices || !data.market_indices.sp500) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-gray-400">No S&P 500 data available</p>
+        <p className="text-gray-400">No SPY data available</p>
       </div>
     );
   }
 
   const sp500 = data.market_indices.sp500;
-  
+  const currentPrice = sp500.polygon_price || sp500.price;
+  const change = sp500.change_percent;
+  const changeColor = change >= 0 ? 'text-green-400' : 'text-red-400';
+  const arrow = change >= 0 ? '↗' : '↘';
+
+  const formatPrice = (price: number) => {
+    return price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
   // Use polygon data for more accurate OHLC
   const ohlcData = [
     { label: 'Open', value: sp500.open },
-    { label: 'High', value: Math.max(sp500.polygon_high, sp500.high) },
-    { label: 'Low', value: Math.min(sp500.polygon_low, sp500.low) },
+    { label: 'High', value: Math.max(sp500.polygon_high || sp500.high, sp500.high) },
+    { label: 'Low', value: Math.min(sp500.polygon_low || sp500.low, sp500.low) },
     { label: 'Close', value: sp500.polygon_price || sp500.price },
   ];
 
@@ -108,7 +116,7 @@ export default function SP500Chart() {
     labels: ohlcData.map(item => item.label),
     datasets: [
       {
-        label: 'S&P 500 OHLC',
+        label: '$SPY OHLC',
         data: ohlcData.map(item => item.value),
         borderColor: 'rgb(251, 146, 60)',
         backgroundColor: 'rgba(251, 146, 60, 0.1)',
@@ -143,7 +151,7 @@ export default function SP500Chart() {
       },
       title: {
         display: true,
-        text: 'S&P 500 Price Range',
+        text: '$SPY Price Range',
         color: 'rgb(249, 250, 251)',
         font: {
           size: 16,
@@ -162,7 +170,7 @@ export default function SP500Chart() {
       y: {
         beginAtZero: false,
         grid: {
-          color: 'rgba(139, 92, 246, 0.2)',
+          color: 'rgba(251, 146, 60, 0.2)',
         },
         ticks: {
           color: 'rgb(156, 163, 175)',
@@ -173,7 +181,7 @@ export default function SP500Chart() {
       },
       x: {
         grid: {
-          color: 'rgba(139, 92, 246, 0.2)',
+          color: 'rgba(251, 146, 60, 0.2)',
         },
         ticks: {
           color: 'rgb(156, 163, 175)',
@@ -183,13 +191,33 @@ export default function SP500Chart() {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
+      {/* Clean ticker card */}
+      <div className="p-4 bg-orange-500/10 rounded-lg border border-orange-500/30">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="text-sm font-bold text-orange-400">$SPY</div>
+            <div className="text-xs text-gray-400">SPDR S&P 500</div>
+          </div>
+          <div className={`flex items-center space-x-1 ${changeColor} text-sm font-medium`}>
+            <span className="text-lg">{arrow}</span>
+            <span>{Math.abs(change).toFixed(2)}%</span>
+          </div>
+        </div>
+        
+        <div className="text-2xl font-bold text-white mt-2">
+          ${formatPrice(currentPrice)}
+        </div>
+      </div>
+
+      {/* OHLC Chart */}
       <div className="h-48 md:h-56">
         <Line data={chartData} options={options} />
       </div>
+      
       <div className="text-xs text-gray-400 px-2">
-        <p className="font-medium text-gray-300 mb-1">S&P 500 OHLC Range</p>
-        <p>Open, High, Low, Close prices showing the day's trading range. Represents 500 largest US companies.</p>
+        <p className="font-medium text-gray-300 mb-1">SPDR S&P 500 ETF OHLC</p>
+        <p>Open, High, Low, Close prices showing the day's trading range for SPY.</p>
       </div>
     </div>
   );

@@ -6,31 +6,17 @@ interface MacroData {
   market_indices: {
     sp500: {
       price: number;
-      open: number;
-      high: number;
-      low: number;
-      volume: number;
       change: number;
       change_percent: number;
       timestamp: string;
       polygon_price: number;
-      polygon_volume: number;
-      polygon_high: number;
-      polygon_low: number;
     };
     nasdaq100: {
       price: number;
-      open: number;
-      high: number;
-      low: number;
-      volume: number;
       change: number;
       change_percent: number;
       timestamp: string;
       polygon_price: number;
-      polygon_volume: number;
-      polygon_high: number;
-      polygon_low: number;
     };
   };
 }
@@ -103,16 +89,16 @@ export default function CombinedIndicesChart() {
 
   const indices = [
     {
-      name: 'S&P 500',
-      symbol: 'SPX',
+      name: 'SPDR S&P 500',
+      symbol: '$SPY',
       data: sp500,
       color: 'text-orange-400',
       bgColor: 'bg-orange-500/10',
       borderColor: 'border-orange-500/30'
     },
     {
-      name: 'NASDAQ 100',
-      symbol: 'NDX',
+      name: 'Invesco QQQ',
+      symbol: '$QQQ',
       data: nasdaq100,
       color: 'text-purple-400',
       bgColor: 'bg-purple-500/10',
@@ -123,7 +109,7 @@ export default function CombinedIndicesChart() {
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-center text-white">
-        Market Indices
+        Market ETFs
       </h3>
       
       <div className="space-y-3">
@@ -154,28 +140,8 @@ export default function CombinedIndicesChart() {
               </div>
 
               {/* Price */}
-              <div className="text-xl font-bold text-white mb-3">
+              <div className="text-xl font-bold text-white">
                 ${formatPrice(currentPrice)}
-              </div>
-
-              {/* OHLC Data */}
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Open:</span>
-                  <span className="text-green-300">${formatPrice(index.data.open)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">High:</span>
-                  <span className="text-green-300">${formatPrice(Math.max(index.data.polygon_high || 0, index.data.high))}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Low:</span>
-                  <span className="text-red-300">${formatPrice(Math.min(index.data.polygon_low || 999999, index.data.low))}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Volume:</span>
-                  <span className="text-blue-300">{(index.data.polygon_volume || index.data.volume / 1000000).toFixed(1)}M</span>
-                </div>
               </div>
             </div>
           );
@@ -183,8 +149,8 @@ export default function CombinedIndicesChart() {
       </div>
       
       <div className="text-xs text-gray-400 px-2">
-        <p className="font-medium text-gray-300 mb-1">US Market Indices</p>
-        <p>Real-time S&P 500 and NASDAQ 100 prices with daily performance metrics.</p>
+        <p className="font-medium text-gray-300 mb-1">Popular Market ETFs</p>
+        <p>Real-time SPY and QQQ prices tracking major US market performance.</p>
       </div>
     </div>
   );

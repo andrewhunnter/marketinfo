@@ -13,8 +13,8 @@ import VolumeChart from './components/VolumeChart';
 import ChangeChart from './components/ChangeChart';
 import BTCNetworkChart from './components/BTCNetworkChart';
 import FearGreedChart from './components/FearGreedChart';
-import SP500Chart from './components/SP500Chart';
-import NASDAQChart from './components/NASDAQChart';
+import SPYChart from './components/SP500Chart';
+import QQQChart from './components/NASDAQChart';
 import MarketIndicesChart from './components/MarketIndicesChart';
 import InterestRatesChart from './components/InterestRatesChart';
 import ConsumerDataChart from './components/ConsumerDataChart';
@@ -27,6 +27,7 @@ import CombinedIndicesChart from './components/CombinedIndicesChart';
 export default function Dashboard() {
   const [selectedSymbol, setSelectedSymbol] = useState<string>('BTC');
   const [availableSymbols, setAvailableSymbols] = useState<string[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     // Fetch available symbols
@@ -40,27 +41,60 @@ export default function Dashboard() {
           }
         }
       })
-      .catch(err => console.error('Error fetching overview:', err));
+      .catch(err => console.error('Error fetching overview:', err))
+      .finally(() => setIsLoaded(true));
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
-      {/* Animated background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-green-500/5 via-red-500/5 to-green-500/5 animate-pulse"></div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated background with particles */}
+      <div className="fixed inset-0 bg-gradient-to-br from-black via-slate-900 to-black">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-amber-900/20 via-transparent to-transparent"></div>
+        <div className="particles">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 20}s`,
+                animationDuration: `${15 + Math.random() * 10}s`
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
       
       {/* Header */}
-      <header className="relative z-10 bg-black/20 backdrop-blur-md border-b border-green-500/30 shadow-lg">
+      <header className="relative z-10 glass backdrop-blur-xl border-b border-white/10 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">
-                marketinfo
-              </h1>
-            </div>
+          <div className="flex justify-between items-center py-8">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-300">Real-time market data</span>
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-amber-500 rounded-2xl flex items-center justify-center pulse-glow">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6z" />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h1 className="text-5xl font-black bg-gradient-to-r from-purple-400 via-amber-400 to-pink-400 bg-clip-text text-transparent neon-text">
+                  marketinfo
+                </h1>
+                <p className="text-gray-400 text-sm font-medium">Scraped financial data intelligence platform</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-sm text-gray-300 font-medium">Scraped Market Data</span>
+              </div>
+              <div className="hidden md:flex items-center space-x-2 glass rounded-full px-4 py-2">
+                <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+                </svg>
+                <span className="text-xs text-gray-400">Updated now</span>
               </div>
             </div>
           </div>
@@ -68,31 +102,69 @@ export default function Dashboard() {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Economic Calendar & Market Overview Section - 3 Column Layout */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            main indicators...
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        {/* Hero Section */}
+        <section className={`text-center transform transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
+            market snapshots
+            <span className="block bg-gradient-to-r from-purple-400 to-amber-400 bg-clip-text text-transparent">
+              redefined
+            </span>
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Scraped financial data transformed into powerful visual analytics for smarter trading decisions.
+          </p>
+        </section>
+
+        {/* Economic Calendar & Market Overview Section - 3 Column Layout */}
+        <section className="animate-fade-in">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl font-bold text-white">
+              Market Pulse
+              <span className="block text-lg font-normal text-gray-400 mt-2">Key indicators at a glance</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Economic Calendar */}
-            <div className="lg:col-span-1 bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent mb-4">
-                📅 Economic Events
-              </h3>
-              <EconomicCalendar />
+            <div className="glass-card rounded-3xl p-8 card-hover animate-fade-in-left h-full">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Economic Events
+                  </h3>
+                  <p className="text-gray-400 text-sm">Upcoming market movers</p>
+                </div>
+              </div>
+              <div className="flex-1">
+                <EconomicCalendar />
+              </div>
             </div>
 
             {/* Crypto Snapshot */}
-            <div className="lg:col-span-1 bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-orange-500/20 p-6 hover:border-orange-500/40 transition-all duration-300">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-orange-300 to-pink-300 bg-clip-text text-transparent mb-4">
-                ₿ Crypto Snapshot
-              </h3>
-              <div className="space-y-6">
-                <div className="pb-4 border-b border-orange-500/20">
+            <div className="glass-card rounded-3xl p-8 card-hover animate-fade-in">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-pink-500 rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-orange-400 to-pink-400 bg-clip-text text-transparent">
+                    Crypto Snapshot
+                  </h3>
+                  <p className="text-gray-400 text-sm">Digital asset overview</p>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div className="pb-6 border-b border-white/10">
                   <CryptoPricesChart />
                 </div>
-                <div className="pb-4 border-b border-orange-500/20">
+                <div className="pb-6 border-b border-white/10">
                   <CryptoMarketCapPieChart />
                 </div>
                 <div>
@@ -102,99 +174,148 @@ export default function Dashboard() {
             </div>
 
             {/* Market Indices */}
-            <div className="lg:col-span-1 bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-blue-500/20 p-6 hover:border-blue-500/40 transition-all duration-300">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent mb-4">
-                📈 Market Indices
-              </h3>
-              <div className="space-y-4">
-                <CombinedIndicesChart />
-                <SP500Chart />
-                <NASDAQChart />
+            <div className="glass-card rounded-3xl p-8 card-hover animate-fade-in-right">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Market ETFs
+                  </h3>
+                  <p className="text-gray-400 text-sm">Popular trading instruments</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-4">
+                <SPYChart />
+                <QQQChart />
               </div>
             </div>
           </div>
         </section>
 
         {/* Crypto Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            web-3 dashboard
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-white">
+        <section className="animate-fade-in">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl font-bold text-white">
+              Web3 Dashboard
+              <span className="block text-lg font-normal text-gray-400 mt-2">Decentralized finance insights</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+            <div className="xl:col-span-3 glass-card rounded-3xl p-8 card-hover">
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="text-2xl font-bold text-white">
                   Historical Crypto Data
                 </h3>
                 <select
                   value={selectedSymbol}
                   onChange={(e) => setSelectedSymbol(e.target.value)}
-                  className="px-3 py-1 bg-black/80 text-white border border-green-500/40 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 backdrop-blur-sm text-sm"
+                  className="glass rounded-xl px-4 py-2 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 text-sm font-medium"
                 >
                   {availableSymbols.map(symbol => (
-                    <option key={symbol} value={symbol} className="bg-black">{symbol}</option>
+                    <option key={symbol} value={symbol} className="bg-gray-900">{symbol}</option>
                   ))}
                 </select>
               </div>
               <CryptoChart symbol={selectedSymbol} />
             </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <ChangeChart />
-            </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-green-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <FearGreedChart />
+            <div className="xl:col-span-1 space-y-8">
+              <div className="glass-card rounded-3xl p-6 card-hover">
+                <ChangeChart />
+              </div>
+              <div className="glass-card rounded-3xl p-6 card-hover">
+                <FearGreedChart />
+              </div>
             </div>
           </div>
         </section>
 
-
-
         {/* Economic Data Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-red-400 to-white bg-clip-text text-transparent mb-8">
-            Economic Indicators
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
+        <section className="animate-fade-in">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
+              Economic Indicators
+              <span className="block text-lg font-normal text-gray-400 mt-2">Macro-economic health metrics</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-6">
+            <div className="glass-card rounded-3xl p-6 card-hover">
               <InterestRatesChart />
             </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
+            <div className="glass-card rounded-3xl p-6 card-hover">
               <ConsumerDataChart />
             </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
+            <div className="glass-card rounded-3xl p-6 card-hover">
               <RetailSalesChart />
             </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
+            <div className="glass-card rounded-3xl p-6 card-hover">
               <MoMYoYChart />
             </div>
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-red-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
+            <div className="glass-card rounded-3xl p-6 card-hover">
               <UnemploymentChart />
             </div>
           </div>
         </section>
 
         {/* Data Overview Section */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            Data Overview
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-green-500/40 transition-all duration-300">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-green-300 to-white bg-clip-text text-transparent mb-4">
-                Data Overview
-              </h3>
+        <section className="animate-fade-in">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-4xl font-bold text-white">
+              System Overview
+              <span className="block text-lg font-normal text-gray-400 mt-2">Platform status and data feeds</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="glass-card rounded-3xl p-8 card-hover">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                    Data Overview
+                  </h3>
+                  <p className="text-gray-400 text-sm">System health metrics</p>
+                </div>
+              </div>
               <DataOverview />
             </div>
 
-            <div className="bg-black/60 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-500/20 p-6 hover:border-red-500/40 transition-all duration-300">
-              <h3 className="text-lg font-semibold bg-gradient-to-r from-red-300 to-white bg-clip-text text-transparent mb-4">
-                Latest Push Data
-              </h3>
+            <div className="glass-card rounded-3xl p-8 card-hover">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
+                    Latest Push Data
+                  </h3>
+                  <p className="text-gray-400 text-sm">Real-time data streams</p>
+                </div>
+              </div>
               <PushData />
             </div>
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="relative z-10 mt-20 glass border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <p className="text-gray-400 text-sm">
+              © 2024 MarketInfo. Powered by real-time financial data APIs.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
