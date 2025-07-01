@@ -1,0 +1,254 @@
+{
+  "updated_at": "2025-06-30T21:17:09.077421",
+  "events_count": 31,
+  "events": [
+    {
+      "date": "2025-06-30",
+      "release_id": 488,
+      "name": "Brave-Butters-Kelley Indexes",
+      "press_release": true,
+      "link": "https://www.ibrc.indiana.edu/bbki/",
+      "notes": "The Brave-Butters-Kelley Indexes (BBKI) are the byproduct of research originally conducted by the Federal Reserve Bank of Chicago. Currently, the BBKI are maintained and produced by the Indiana Business Research Center at the Kelley School of Business at Indiana University. The BBK Coincident and Leading Indexes and Monthly GDP Growth for the U.S. are constructed from a collapsed dynamic factor analysis of a panel of 490 monthly measures of real economic activity and quarterly real GDP growth."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 441,
+      "name": "Coinbase Cryptocurrencies",
+      "press_release": false,
+      "link": "https://www.coinbase.com/charts?locale=en-US",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 86,
+      "name": "Commercial Paper",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/releases/cp/",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/cp/%\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 72,
+      "name": "Daily Treasury Inflation-Indexed Securities",
+      "press_release": false,
+      "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 197,
+      "name": "Dow Jones Averages",
+      "press_release": false,
+      "link": "https://us.spindices.com/index-family/us-equity/dow-jones-averages",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 279,
+      "name": "Economic Policy Uncertainty",
+      "press_release": false,
+      "link": "http://www.policyuncertainty.com/",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 502,
+      "name": "Euro Short Term Rate",
+      "press_release": true,
+      "link": "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html",
+      "notes": "The euro short-term rate (\u20acSTR) reflects the wholesale euro unsecured overnight borrowing costs of banks located in the euro area. The \u20acSTR is published on each TARGET2 business day based on transactions conducted and settled on the previous TARGET2 business day (the reporting date \u201cT\u201d) with a maturity date of T+1 which are deemed to have been executed at arm\u2019s length and thus reflect market rates in an unbiased way."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 378,
+      "name": "Federal Funds Data",
+      "press_release": false,
+      "link": "https://apps.newyorkfed.org/markets/autorates/fed%20funds",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 101,
+      "name": "FOMC Press Release",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/fomc/",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 17,
+      "name": "H.10 Foreign Exchange Rates",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/releases/h10/",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/h10/%\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 18,
+      "name": "H.15 Selected Interest Rates",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/releases/h15/",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/h15/%\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 504,
+      "name": "Historical Overnight AMERIBOR Unsecured Interest Rate",
+      "press_release": true,
+      "link": "https://ameribor.net/",
+      "notes": "AMERIBOR\u00ae (American Interbank Offered Rate) is a transparent benchmark interest rate based on overnight unsecured loans transacted on the American Financial Exchange (AFX). AMERIBOR\u00ae reflects the actual borrowing costs of thousands of small, medium, and regional banks across America. AMERIBOR\u00ae is also useful for larger banks and financial institutions that do business with these banks, as well as small and middle market companies."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 185,
+      "name": "Interest Rate on Reserve Balances",
+      "press_release": false,
+      "link": "http://www.federalreserve.gov/monetarypolicy/reqresbalances.htm",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/monetarypolicy/reserve-balances.htm\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 304,
+      "name": "Interest Rate Spreads",
+      "press_release": false,
+      "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 239,
+      "name": "International Financial Statistics",
+      "press_release": false,
+      "link": "http://www.imf.org/external/data.htm",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 739,
+      "name": "Kansas City Fed Policy Rate Uncertainty",
+      "press_release": true,
+      "link": "https://www.kansascityfed.org/data-and-trends/kansas-city-fed-policy-rate-uncertainty/",
+      "notes": "The Kansas City Fed\u2019s Measure of Policy Rate Uncertainty (KC PRU) is a daily measure of market-based uncertainty regarding where short-term U.S. interest rates will be one year in the future."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 484,
+      "name": "Key ECB Interest Rates",
+      "press_release": true,
+      "link": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 355,
+      "name": "Minimum Wage Rates",
+      "press_release": false,
+      "link": "http://www.dol.gov/whd/minimumwage.htm",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 477,
+      "name": "Monthly State Retail Sales",
+      "press_release": true,
+      "link": "https://www.census.gov/retail/state_retail_sales.html",
+      "notes": "The Monthly State Retail Sales (MSRS) is the Census Bureau's experimental data product featuring modeled state-level retail sales. This is a blended data product using Monthly Retail Trade Survey data, administrative data, and third-party data. Year-over-year percent changes are available for Total Retail Sales excluding Nonstore Retailers as well as 11 retail North American Industry Classification System (NAICS) retail subsectors. These data are provided by state and NAICS codes beginning with January 2019. The Census Bureau plans to continue to improve the methodology to be able to publish more data in the future.\r\n\r\nUsers are encouraged to read the overview at https://www.census.gov/retail/mrts/www/statedata/msrs_overview.pdf"
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 427,
+      "name": "Moody's Daily Corporate Bond Yield Averages",
+      "press_release": false,
+      "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 287,
+      "name": "Nikkei Indexes",
+      "press_release": false,
+      "link": "http://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 375,
+      "name": "Overnight Bank Funding Rate Data",
+      "press_release": false,
+      "link": "https://apps.newyorkfed.org/markets/autorates/obfr",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 242,
+      "name": "Recession Indicators Series",
+      "press_release": false,
+      "link": "http://www.oecd.org/std/leading-indicators/oecdcompositeleadingindicatorsreferenceturningpointsandcomponentseries.htm",
+      "notes": "These time series are an interpretation of US Business Cycle Expansions and Contractions data provided by The National Bureau of Economic Research (NBER) at http://www.nber.org/cycles/cyclesmain.html and Organisation of Economic Development (OECD) Composite Leading Indicators: Reference Turning Points and Component Series data provided by the OECD at http://www.oecd.org/std/leading-indicators/oecdcompositeleadingindicatorsreferenceturningpointsandcomponentseries.htm. Our time series are composed of dummy variables that represent periods of expansion and recession. The NBER identifies months and quarters, while the OECD identifies months, of turning points without designating a date within the period that turning points occurred. The dummy variable adopts an arbitrary convention that the turning point occurred at a specific date within the period. The arbitrary convention does not reflect any judgment on this issue by the NBER's Business Cycle Dating Committee or the OECD. A value of 1 is a recessionary period, while a value of 0 is an expansionary period.\r\n\r\nThe recession shading data that we provide initially comes from the source as a list of dates that are either an economic peak or trough. We interpret dates into recession shading data using one of three arbitrary methods. All of our recession shading data is available using all three interpretations. The period between a peak and trough is always shaded as a recession. The peak and trough are collectively extrema. Depending on the application, the extrema, both individually and collectively, may be included in the recession period in whole or in part. In situations where a portion of a period is included in the recession, the whole period is deemed to be included in the recession period. \r\n\r\nThe first interpretation, known as the midpoint method, is to show a recession from the midpoint of the peak through the midpoint of the trough for monthly and quarterly data. For daily data, the recession begins on the 15th of the month of the peak and ends on the 15th of the month of the trough. Daily data is a disaggregation of monthly data. For monthly and quarterly data, the entire peak and trough periods are included in the recession shading. This method shows the maximum number of periods as a recession for monthly and quarterly data. The Federal Reserve Bank of St. Louis uses this method in its own publications.\r\n\r\nThe second interpretation, known as the trough method, is to show a recession from the period following the peak through the trough (i.e. the peak is not included in the recession shading, but the trough is). For daily data, the recession begins on the first day of the first month following the peak and ends on the last day of the month of the trough. Daily data is a disaggregation of monthly data. The trough method is used when displaying data on FRED graphs.\r\n\r\nThe third interpretation, known as the peak method, is to show a recession from the period of the peak to the trough (i.e. the peak is included in the recession shading, but the trough is not). For daily data, the recession begins on the first day of the month of the peak and ends on the last day of the month preceding the trough. Daily data is a disaggregation of monthly data."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 445,
+      "name": "Secured Overnight Financing Rate Data",
+      "press_release": true,
+      "link": "https://www.newyorkfed.org/markets/reference-rates/sofr",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 483,
+      "name": "SOFR Averages and Index Data",
+      "press_release": true,
+      "link": "https://www.newyorkfed.org/markets/reference-rates/sofr-averages-and-index",
+      "notes": "As an extension of the Secured Overnight Financing Rate (SOFR), the SOFR Averages are compounded averages of the SOFR over rolling 30-, 90-, and 180-calendar day periods.\r\n\r\nThe SOFR Index measures the cumulative impact of compounding the SOFR on a unit of investment over time, with the initial value set to 1 on April 2, 2018, the first value date of the SOFR. The SOFR Index value reflects the effect of compounding the SOFR each business day and allows the calculation of compounded SOFR averages over custom time periods."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 492,
+      "name": "SONIA Interest Rate Benchmark",
+      "press_release": true,
+      "link": "https://www.bankofengland.co.uk/markets/sonia-benchmark",
+      "notes": "SONIA is a measure of the rate at which interest is paid on sterling short-term wholesale funds in circumstances where credit, liquidity and other risks are minimal.\r\n\r\nOn each London business day, SONIA is measured as the trimmed mean, rounded to four decimal places, of interest rates paid on eligible sterling denominated deposit transactions. \r\n\r\nThe trimmed mean is calculated as the volume-weighted mean rate, based on the central 50 per cent of the volume-weighted distribution of rates."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 189,
+      "name": "Standard & Poors",
+      "press_release": false,
+      "link": "https://us.spindices.com/indices/equity/sp-500",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 469,
+      "name": "State Unemployment Insurance Weekly Claims Report",
+      "press_release": true,
+      "link": "https://oui.doleta.gov/unemploy/DataDashboard.asp",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 379,
+      "name": "Temporary Open Market Operations",
+      "press_release": false,
+      "link": "https://www.newyorkfed.org/markets/data-hub",
+      "notes": ""
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 374,
+      "name": "Texas Manufacturing Outlook Survey",
+      "press_release": true,
+      "link": "https://www.dallasfed.org/research/surveys/tmos",
+      "notes": "The Texas Manufacturing Outlook Survey (TMOS) is a monthly survey of area manufacturers. Firm executives report on how business conditions have changed for a number of indicators, such as production, new orders, employment, prices and company outlook. Respondents are also asked to report on how they perceive broader economic conditions to have changed (general business activity). For all questions, participants are asked whether the indicator has increased, decreased or remained unchanged. Answers cover changes over the previous month and expectations for activity six months into the future. Participants are given the opportunity to submit comments on current issues that may be affecting their business."
+    },
+    {
+      "date": "2025-06-30",
+      "release_id": 359,
+      "name": "U.S. International Investment Position",
+      "press_release": true,
+      "link": "https://www.bea.gov/data/intl-trade-investment/international-investment-position",
+      "notes": ""
+    }
+  ]
+}
