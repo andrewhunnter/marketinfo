@@ -24,6 +24,7 @@ import UnemploymentChart from './components/UnemploymentChart';
 import CryptoMarketCapPieChart from './components/CryptoMarketCapPieChart';
 import CombinedIndicesChart from './components/CombinedIndicesChart';
 import ChatBot from './components/ChatBot';
+import FloatingChatButton from './components/FloatingChatButton';
 
 
 export default function Dashboard() {
@@ -109,64 +110,7 @@ export default function Dashboard() {
 
       {/* Main Content */}
       <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
-        {/* Hero Section */}
-        <section className={`text-center transform transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          {/* Inline ChatGPT-style Interface */}
-          <div className="max-w-4xl mx-auto">
-            <div className="glass-card rounded-3xl p-8 border border-purple-400/30">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-amber-500 rounded-xl flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-amber-400 bg-clip-text text-transparent">
-                    Ask About Your Data
-                  </h3>
-                  <p className="text-gray-400 text-sm">Get insights about market trends, crypto performance, and economic indicators</p>
-                </div>
-              </div>
-              
-              {/* Chat Messages Area */}
-              <div className="mb-6 h-64 overflow-y-auto bg-black/20 rounded-2xl p-4 border border-white/10">
-                <div className="space-y-4">
-                  {/* Welcome Message */}
-                  <div className="flex items-start space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364-.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <div className="bg-gray-800/50 rounded-2xl px-4 py-3">
-                      <p className="text-white text-sm">
-                        Hi! Ask me anything about the market data.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Chat Input */}
-              <div className="relative">
-                <div className="flex items-center space-x-3">
-                  <div className="flex-1 relative">
-                    <input
-                      type="text"
-                      placeholder="Ask about your market data..."
-                      className="w-full bg-gray-800/50 border border-gray-600/50 rounded-2xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition-all duration-300"
-                    />
-                  </div>
-                  <button className="bg-gradient-to-r from-purple-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 rounded-2xl p-4 text-white transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/25">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {/* Economic Calendar & Market Overview Section - 3 Column Layout */}
         <section className="animate-fade-in">
@@ -341,6 +285,12 @@ export default function Dashboard() {
         </section>
       </main>
       
+
+      {/* Floating Chat Button */}
+      <FloatingChatButton 
+        onClick={() => setIsChatOpen(!isChatOpen)}
+        isOpen={isChatOpen}
+      />
 
       {/* Chatbot Component */}
       <ChatBot 

@@ -86,11 +86,8 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
   }
 
   // Extract labels and values from the data
-  // Assuming the CSV has columns like 'date', 'price', 'volume', etc.
-  const labels = data.map((item, index) => {
-    // Try different possible date/timestamp column names
-    return item.date || item.timestamp || item.Date || item.Timestamp || `Point ${index + 1}`;
-  });
+  // Create simple numbered labels for minimal look
+  const labels = data.map((_, index) => (index + 1).toString());
 
   // Try to find price-like columns
   const priceKey = Object.keys(data[0]).find(key => 
@@ -100,6 +97,29 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
   ) || Object.keys(data[0])[1]; // fallback to second column
 
   const prices = data.map(item => parseFloat(item[priceKey]) || 0);
+
+  // Calculate trend line from beginning to end
+  const firstPrice = prices[0];
+  const lastPrice = prices[prices.length - 1];
+  const trendLineData = prices.map((_, index) => {
+    const progress = index / (prices.length - 1);
+    return firstPrice + (lastPrice - firstPrice) * progress;
+  });
+
+  // Calculate support and resistance levels
+  const maxPrice = Math.max(...prices);
+  const minPrice = Math.min(...prices);
+  const priceRange = maxPrice - minPrice;
+  
+  // Resistance level (yellow) - upper level
+  const resistance = maxPrice - priceRange * 0.15; // 15% below max
+  
+  // Support level (white) - lower level  
+  const support = minPrice + priceRange * 0.15; // 15% above min
+
+  // Create arrays for horizontal lines
+  const resistanceData = new Array(prices.length).fill(resistance);
+  const supportData = new Array(prices.length).fill(support);
 
   const chartData = {
     labels,
@@ -118,6 +138,46 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
         pointHoverBorderColor: 'rgb(255, 255, 255)',
         pointRadius: 4,
         pointHoverRadius: 6,
+        order: 1,
+      },
+      {
+        label: 'Trend Line',
+        data: trendLineData,
+        borderColor: 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderDash: [10, 5], // Dotted line
+        fill: false,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        order: 2,
+      },
+      {
+        label: 'Resistance',
+        data: resistanceData,
+        borderColor: 'rgba(255, 255, 0, 0.8)', // Yellow
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderDash: [8, 4],
+        fill: false,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        order: 3,
+      },
+      {
+        label: 'Support',
+        data: supportData,
+        borderColor: 'rgba(255, 255, 255, 0.8)', // White
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderDash: [8, 4],
+        fill: false,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        order: 4,
       },
     ],
   };
@@ -133,17 +193,39 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
           font: {
             size: 12,
           },
+          filter: function(legendItem: any) {
+            // Show all legend items
+            return true;
+          }
         },
       },
       title: {
         display: true,
-        text: `${symbol} Price Chart`,
+        text: `${symbol} Price Chart with Technical Analysis`,
         color: 'rgb(249, 250, 251)', // gray-50
         font: {
           size: 16,
           weight: 'bold' as const,
         },
       },
+      tooltip: {
+        mode: 'index' as const,
+        intersect: false,
+        callbacks: {
+          label: function(context: any) {
+            if (context.datasetIndex === 0) {
+              return `${symbol} Price: $${context.parsed.y.toFixed(2)}`;
+            } else if (context.datasetIndex === 1) {
+              return `Trend: $${context.parsed.y.toFixed(2)}`;
+            } else if (context.datasetIndex === 2) {
+              return `Resistance: $${context.parsed.y.toFixed(2)}`;
+            } else if (context.datasetIndex === 3) {
+              return `Support: $${context.parsed.y.toFixed(2)}`;
+            }
+            return '';
+          }
+        }
+      }
     },
     scales: {
       y: {
@@ -153,6 +235,9 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
         },
         ticks: {
           color: 'rgb(156, 163, 175)', // gray-400
+          callback: function(value: any) {
+            return '$' + value.toFixed(2);
+          }
         },
       },
       x: {
@@ -163,6 +248,10 @@ export default function CryptoChart({ symbol }: CryptoChartProps) {
           color: 'rgb(156, 163, 175)', // gray-400
         },
       },
+    },
+    interaction: {
+      mode: 'index' as const,
+      intersect: false,
     },
   };
 

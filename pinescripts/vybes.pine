@@ -1,0 +1,41 @@
+//@version=6
+indicator("SOL Trend + Volume Spike", overlay=true)
+
+// === Trend Detector ===
+ma = ta.sma(close, 20)
+uptrend = close > ma
+bgcolor(uptrend ? color.new(color.blue, 85) : color.new(color.purple, 85))
+plot(ma, color=uptrend ? color.new(color.blue, 50) : color.new(color.purple, 50), title="SMA")
+
+// === Trend Flip Dots ===
+trendUp = ta.crossover(close, ma)
+trendDown = ta.crossunder(close, ma)
+
+plotshape(trendUp, title="Start of Uptrend", location=location.belowbar, style=shape.circle, size=size.small, color=#90EE90)
+plotshape(trendDown, title="Start of Downtrend", location=location.abovebar, style=shape.circle, size=size.small, color=#FFB6C1)
+
+// === Support & Resistance (Last Month Only) ===
+// Get highest and lowest prices from last 30 bars
+lookback = 30
+monthHigh = ta.highest(high, lookback)
+monthLow = ta.lowest(low, lookback)
+
+// Plot support and resistance lines
+resistance = plot(monthHigh, color=color.yellow, linewidth=2, title="Resistance (30D)")
+support = plot(monthLow, color=color.white, linewidth=2, title="Support (30D)")
+
+// === Trend Status Table ===
+if barstate.islast
+    var table infoTable = table.new(position.bottom_right, 2, 2, bgcolor=color.white, border_width=1)
+    
+    // Current trend status
+    currentTrend = uptrend ? "BULLISH" : "BEARISH"
+    trendColor = uptrend ? color.green : color.red
+    
+    // Update table
+    table.cell(infoTable, 0, 0, "Trend Status", text_color=color.black, text_size=size.normal)
+    table.cell(infoTable, 1, 0, currentTrend, text_color=trendColor, text_size=size.large)
+    
+    table.cell(infoTable, 0, 1, "Price vs SMA", text_color=color.black, text_size=size.small)
+    priceVsSMA = str.tostring(math.round((close/ma - 1) * 100, 2)) + "%"
+    table.cell(infoTable, 1, 1, priceVsSMA, text_color=trendColor, text_size=size.small)

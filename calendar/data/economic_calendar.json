@@ -1,8 +1,8 @@
 {
-  "updated_at": "2025-07-01T06:57:52.778160",
-  "events_count": 33,
-  "new_events_count": 2,
-  "cached_events_count": 31,
+  "updated_at": "2025-07-02T09:36:39.383509",
+  "events_count": 47,
+  "new_events_count": 14,
+  "cached_events_count": 33,
   "events": [
     {
       "date": "2025-06-30",
@@ -262,6 +262,118 @@
     },
     {
       "date": "2025-07-01",
+      "release_id": 492,
+      "name": "SONIA Interest Rate Benchmark",
+      "press_release": true,
+      "link": "https://www.bankofengland.co.uk/markets/sonia-benchmark",
+      "notes": "SONIA is a measure of the rate at which interest is paid on sterling short-term wholesale funds in circumstances where credit, liquidity and other risks are minimal.\r\n\r\nOn each London business day, SONIA is measured as the trimmed mean, rounded to four decimal places, of interest rates paid on eligible sterling denominated deposit transactions. \r\n\r\nThe trimmed mean is calculated as the volume-weighted mean rate, based on the central 50 per cent of the volume-weighted distribution of rates."
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 194,
+      "name": "ADP National Employment Report",
+      "press_release": true,
+      "link": "http://www.adpemploymentreport.com/",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 221,
+      "name": "Chicago Fed National Financial Conditions Index",
+      "press_release": false,
+      "link": "https://www.chicagofed.org/publications/nfci/index",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 72,
+      "name": "Daily Treasury Inflation-Indexed Securities",
+      "press_release": false,
+      "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 279,
+      "name": "Economic Policy Uncertainty",
+      "press_release": false,
+      "link": "http://www.policyuncertainty.com/",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 502,
+      "name": "Euro Short Term Rate",
+      "press_release": true,
+      "link": "https://www.ecb.europa.eu/stats/financial_markets_and_interest_rates/euro_short-term_rate/html/index.en.html",
+      "notes": "The euro short-term rate (\u20acSTR) reflects the wholesale euro unsecured overnight borrowing costs of banks located in the euro area. The \u20acSTR is published on each TARGET2 business day based on transactions conducted and settled on the previous TARGET2 business day (the reporting date \u201cT\u201d) with a maturity date of T+1 which are deemed to have been executed at arm\u2019s length and thus reflect market rates in an unbiased way."
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 378,
+      "name": "Federal Funds Data",
+      "press_release": false,
+      "link": "https://apps.newyorkfed.org/markets/autorates/fed%20funds",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 101,
+      "name": "FOMC Press Release",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/fomc/",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 504,
+      "name": "Historical Overnight AMERIBOR Unsecured Interest Rate",
+      "press_release": true,
+      "link": "https://ameribor.net/",
+      "notes": "AMERIBOR\u00ae (American Interbank Offered Rate) is a transparent benchmark interest rate based on overnight unsecured loans transacted on the American Financial Exchange (AFX). AMERIBOR\u00ae reflects the actual borrowing costs of thousands of small, medium, and regional banks across America. AMERIBOR\u00ae is also useful for larger banks and financial institutions that do business with these banks, as well as small and middle market companies."
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 484,
+      "name": "Key ECB Interest Rates",
+      "press_release": true,
+      "link": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 287,
+      "name": "Nikkei Indexes",
+      "press_release": false,
+      "link": "http://indexes.nikkei.co.jp/en/nkave/index/profile?idx=nk225",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 375,
+      "name": "Overnight Bank Funding Rate Data",
+      "press_release": false,
+      "link": "https://apps.newyorkfed.org/markets/autorates/obfr",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 445,
+      "name": "Secured Overnight Financing Rate Data",
+      "press_release": true,
+      "link": "https://www.newyorkfed.org/markets/reference-rates/sofr",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 483,
+      "name": "SOFR Averages and Index Data",
+      "press_release": true,
+      "link": "https://www.newyorkfed.org/markets/reference-rates/sofr-averages-and-index",
+      "notes": "As an extension of the Secured Overnight Financing Rate (SOFR), the SOFR Averages are compounded averages of the SOFR over rolling 30-, 90-, and 180-calendar day periods.\r\n\r\nThe SOFR Index measures the cumulative impact of compounding the SOFR on a unit of investment over time, with the initial value set to 1 on April 2, 2018, the first value date of the SOFR. The SOFR Index value reflects the effect of compounding the SOFR each business day and allows the calculation of compounded SOFR averages over custom time periods."
+    },
+    {
+      "date": "2025-07-02",
       "release_id": 492,
       "name": "SONIA Interest Rate Benchmark",
       "press_release": true,
