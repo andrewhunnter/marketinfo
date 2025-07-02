@@ -1,33 +1,56 @@
-# TrendFlow Trading Strategy
+# MarketInfo - Personal Finance Dashboard
 
 ## Overview
-TrendFlow is a technical indicator designed to identify market trends and potential reversal points. When combined with market news sentiment (bullish or bearish), it creates a powerful framework for predicting price direction.
+MarketInfo is a comprehensive personal finance dashboard that provides real-time market data, economic indicators, and cryptocurrency insights all in one place. Track your investments, monitor market trends, and stay informed about economic events that could impact your financial decisions.
 
-## How TrendFlow Works
-The TrendFlow indicator in `trendflow.pine` consists of:
-1. **Trend Detection** - Uses a 20-period Simple Moving Average (SMA) to determine the current trend
-2. **Background Color** - Green background indicates uptrend, red background indicates downtrend
-3. **Trend Flip Signals** - Green dots appear when price crosses above SMA (bullish), red dots appear when price crosses below SMA (bearish)
+## Features
 
-## Combining TrendFlow with News
-When TrendFlow signals align with relevant market news, trading opportunities with higher probability emerge:
+### Market Data & Analytics
+- **Real-time Cryptocurrency Prices** - Track Bitcoin, Ethereum, Solana and other major cryptocurrencies
+- **Stock Market Indices** - Monitor S&P 500, NASDAQ, and other key market indicators
+- **Market Sentiment Analysis** - Fear & Greed Index and market sentiment tracking
+- **Volume Analysis** - Trading volume charts and market activity insights
 
-### Bullish Scenarios
-- **Strong Buy Signal**: TrendFlow shows a green dot (price crossing above SMA) + positive news catalyst
-- **Trend Confirmation**: Existing green background (uptrend) + positive news reinforces upward momentum
-- **Reversal Warning**: Despite red background (downtrend), a green dot + positive news may signal trend reversal
+### Economic Indicators
+- **Economic Calendar** - Stay updated on important economic events and releases
+- **Interest Rates** - Track Federal Reserve rates and monetary policy changes
+- **Employment Data** - Unemployment rates and job market statistics
+- **Consumer Data** - Retail sales, consumer confidence, and spending patterns
+- **Inflation Metrics** - Month-over-month and year-over-year inflation tracking
 
-### Bearish Scenarios
-- **Strong Sell Signal**: TrendFlow shows a red dot (price crossing below SMA) + negative news catalyst
-- **Trend Confirmation**: Existing red background (downtrend) + negative news reinforces downward momentum
-- **Reversal Warning**: Despite green background (uptrend), a red dot + negative news may signal trend reversal
+### Interactive Dashboard
+- **Modern Web Interface** - Clean, responsive design built with Next.js
+- **Real-time Updates** - Live data feeds and automatic refresh
+- **Interactive Charts** - Zoom, filter, and analyze data with dynamic visualizations
+- **AI Chat Assistant** - Ask questions about market data and get intelligent insights
 
-## Implementation Strategy
-1. Monitor TrendFlow indicator for trend status and potential flip signals
-2. Track relevant news sources for market-moving information
-3. Look for confluence between technical signals and fundamental news
-4. Consider position sizing based on strength of confluence
-5. Set stop losses based on the most recent trend flip point
+### Data Sources & Automation
+- **Automated Data Collection** - Scripts that gather data from multiple financial APIs
+- **Historical Data Storage** - Maintain historical records for trend analysis
+- **Custom Alerts** - Set up notifications for important market events
 
-## Risk Management
-Always remember that even strong technical signals combined with news can fail. Use proper risk management and position sizing for each trade.
+## Components
+
+### Frontend Dashboard
+- Next.js-based web application with interactive charts and real-time data visualization
+- Responsive design that works on desktop and mobile devices
+
+### Backend API
+- Python Flask server providing data endpoints and market analysis
+- Real-time data processing and storage
+
+### Data Collection
+- Automated scrapers for cryptocurrency and macroeconomic data
+- Economic calendar integration for upcoming events
+- Market sentiment data aggregation
+
+### Pine Script Indicators
+- Custom TradingView indicators for advanced technical analysis
+- Trend detection and market signal generation
+
+## Use Cases
+- **Portfolio Monitoring** - Track your investments and market performance
+- **Market Research** - Analyze trends and make informed investment decisions
+- **Economic Awareness** - Stay informed about macroeconomic factors affecting markets
+- **Educational Tool** - Learn about financial markets and economic indicators
+- **Planning & Strategy** - Use data insights for financial planning and investment strategy

@@ -10,7 +10,7 @@
       "change": -2.4414062522737368e-05,
       "change_percent": -3.952734001087091e-06,
       "previous_close": 617.6500244140625,
-      "timestamp": "2025-07-02T13:36:53.183914",
+      "timestamp": "2025-07-02T14:29:02.940088",
       "data_date": "2025-07-02",
       "polygon_close": 617.65,
       "polygon_open": 616.36,
@@ -29,7 +29,7 @@
       "change": 9.765625009094947e-06,
       "change_percent": 1.7853388879951091e-06,
       "previous_close": 546.989990234375,
-      "timestamp": "2025-07-02T13:36:53.819284",
+      "timestamp": "2025-07-02T14:29:03.818349",
       "data_date": "2025-07-02",
       "polygon_close": 546.99,
       "polygon_open": 549.73,
@@ -40,28 +40,28 @@
     },
     "vix": {
       "symbol": "^VIX",
-      "price": 17.270000457763672,
+      "price": 17.020000457763672,
       "open": 16.75,
       "high": 17.3700008392334,
       "low": 16.739999771118164,
       "volume": 0,
-      "change": 0.4400005340576172,
-      "change_percent": 2.6143822700667414,
+      "change": 0.1900005340576172,
+      "change_percent": 1.1289396014196658,
       "previous_close": 16.829999923706055,
-      "timestamp": "2025-07-02T13:36:54.425053",
+      "timestamp": "2025-07-02T14:29:04.422427",
       "data_date": "2025-07-02"
     }
   },
   "interest_rates": {
     "us10yr": {
-      "yield_percent": 4.296000003814697,
-      "change": 0.026999950408935547,
-      "timestamp": "2025-07-02T13:36:55.732756"
+      "yield_percent": 4.290999889373779,
+      "change": 0.021999835968017578,
+      "timestamp": "2025-07-02T14:29:05.728182"
     },
     "fed_funds_rate": {
       "rate_percent": 0.8,
       "date": "1954-07-01",
-      "timestamp": "2025-07-02T13:36:55.878330",
+      "timestamp": "2025-07-02T14:29:05.884102",
       "source": "FRED"
     }
   },
@@ -71,7 +71,7 @@
       "change_mom": 1.153353267834257,
       "change_yoy": 10.24208566108007,
       "date": "1948-01-01",
-      "timestamp": "2025-07-02T13:36:56.004781",
+      "timestamp": "2025-07-02T14:29:06.027574",
       "source": "FRED"
     },
     "retail_sales": {
@@ -79,22 +79,22 @@
       "change_mom": 1.0787698803155803,
       "change_yoy": 6.485233419401045,
       "date": "1993-01-01",
-      "timestamp": "2025-07-02T13:36:56.237662",
+      "timestamp": "2025-07-02T14:29:06.184481",
       "source": "FRED"
     },
     "unemployment_rate": {
       "rate_percent": 3.4,
       "date": "1948-01-01",
-      "timestamp": "2025-07-02T13:36:56.363540",
+      "timestamp": "2025-07-02T14:29:06.400529",
       "source": "FRED"
     },
     "inflation_rate": {
       "rate_percent": 1.45797598627791,
       "date": "1960-01-01",
-      "timestamp": "2025-07-02T13:36:56.484639",
+      "timestamp": "2025-07-02T14:29:06.546725",
       "source": "FRED"
     }
   },
-  "timestamp": "2025-07-02T13:36:56.484812",
+  "timestamp": "2025-07-02T14:29:06.547031",
   "data_type": "macro"
 }

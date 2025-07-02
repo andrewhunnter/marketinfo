@@ -1,0 +1,232 @@
+# ==============================================================================
+# MARKETINFO PROJECT .GITIGNORE
+# ==============================================================================
+
+# Python
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+# ------------------------------------------------------------------------------
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+pyvenv.cfg
+
+# Node.js / JavaScript / TypeScript
+# ------------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+/.pnp
+.pnp.*
+/coverage
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment Variables
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+
+# Process ID Files
+# ------------------------------------------------------------------------------
+*.pid
+backend.pid
+frontend.pid
+
+# Session Files
+# ------------------------------------------------------------------------------
+*.session
+*.session-journal
+
+# Data Files (frequently changing)
+# ------------------------------------------------------------------------------
+*/data/latest.json
+crypto_data/latest.json
+macro_data/latest.json
+calendar/data/economic_calendar.json
+
+# CSV Data Files (if they're generated/downloaded)
+# ------------------------------------------------------------------------------
+*.csv
+!**/sample*.csv
+!**/template*.csv
+
+# Logs
+# ------------------------------------------------------------------------------
+*.log
+logs/
+*.log.*
+
+# Temporary Files
+# ------------------------------------------------------------------------------
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+# OS Generated Files
+# ------------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE / Editor Files
+# ------------------------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+
+# Database Files
+# ------------------------------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
+
+# Compiled Files
+# ------------------------------------------------------------------------------
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Package Files
+# ------------------------------------------------------------------------------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Jupyter Notebook
+# ------------------------------------------------------------------------------
+.ipynb_checkpoints
+
+# pyenv
+# ------------------------------------------------------------------------------
+.python-version
+
+# pipenv
+# ------------------------------------------------------------------------------
+Pipfile.lock
+
+# PEP 582
+# ------------------------------------------------------------------------------
+__pypackages__/
+
+# Celery
+# ------------------------------------------------------------------------------
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+# ------------------------------------------------------------------------------
+*.sage.py
+
+# Spyder project settings
+# ------------------------------------------------------------------------------
+.spyderproject
+.spyproject
+
+# Rope project settings
+# ------------------------------------------------------------------------------
+.ropeproject
+
+# mkdocs documentation
+# ------------------------------------------------------------------------------
+/site
+
+# mypy
+# ------------------------------------------------------------------------------
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+# ------------------------------------------------------------------------------
+.pyre/
+
+# pytype static type analyzer
+# ------------------------------------------------------------------------------
+.pytype/
+
+# Cython debug symbols
+# ------------------------------------------------------------------------------
+cython_debug/
+
+# Vercel
+# ------------------------------------------------------------------------------
+.vercel
+
+# Local development
+# ------------------------------------------------------------------------------
+.local/
+local/
+
+# Testing
+# ------------------------------------------------------------------------------
+.coverage
+.pytest_cache/
+.tox/
+.nox/
+htmlcov/
+
+# Documentation builds
+# ------------------------------------------------------------------------------
+docs/_build/ 
