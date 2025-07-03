@@ -117,9 +117,10 @@ export default function CryptoMarketCapPieChart() {
   };
 
   const getMarketCapChange = (marketCap: number, priceChange: number) => {
-    const changeAmount = marketCap * priceChange;
+    // priceChange is already a percentage value, so convert to decimal for amount calculation
+    const changeAmount = marketCap * (priceChange / 100);
     return {
-      percentage: priceChange * 100,
+      percentage: priceChange, // Use as-is since it's already a percentage
       amount: changeAmount
     };
   };

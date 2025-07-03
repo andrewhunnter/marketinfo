@@ -1,8 +1,8 @@
 {
-  "updated_at": "2025-07-02T10:28:54.859511",
-  "events_count": 47,
-  "new_events_count": 14,
-  "cached_events_count": 47,
+  "updated_at": "2025-07-02T22:18:46.899903",
+  "events_count": 65,
+  "new_events_count": 32,
+  "cached_events_count": 65,
   "events": [
     {
       "date": "2025-06-30",
@@ -278,6 +278,14 @@
     },
     {
       "date": "2025-07-02",
+      "release_id": 266,
+      "name": "Bank of Japan Accounts",
+      "press_release": true,
+      "link": "http://www.boj.or.jp/en/statistics/boj/other/ac/index.htm/",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
       "release_id": 221,
       "name": "Chicago Fed National Financial Conditions Index",
       "press_release": false,
@@ -286,10 +294,34 @@
     },
     {
       "date": "2025-07-02",
+      "release_id": 441,
+      "name": "Coinbase Cryptocurrencies",
+      "press_release": false,
+      "link": "https://www.coinbase.com/charts?locale=en-US",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 86,
+      "name": "Commercial Paper",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/releases/cp/",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/cp/%\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-07-02",
       "release_id": 72,
       "name": "Daily Treasury Inflation-Indexed Securities",
       "press_release": false,
       "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 197,
+      "name": "Dow Jones Averages",
+      "press_release": false,
+      "link": "https://us.spindices.com/index-family/us-equity/dow-jones-averages",
       "notes": ""
     },
     {
@@ -326,6 +358,14 @@
     },
     {
       "date": "2025-07-02",
+      "release_id": 18,
+      "name": "H.15 Selected Interest Rates",
+      "press_release": true,
+      "link": "http://www.federalreserve.gov/releases/h15/",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/releases/h15/%\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-07-02",
       "release_id": 504,
       "name": "Historical Overnight AMERIBOR Unsecured Interest Rate",
       "press_release": true,
@@ -334,11 +374,59 @@
     },
     {
       "date": "2025-07-02",
+      "release_id": 185,
+      "name": "Interest Rate on Reserve Balances",
+      "press_release": false,
+      "link": "http://www.federalreserve.gov/monetarypolicy/reqresbalances.htm",
+      "notes": "For questions on the data, please contact the data source: https://www.federalreserve.gov/apps/ContactUs/feedback.aspx?refurl=/monetarypolicy/reserve-balances.htm\r\nFor questions on FRED functionality, please contact: https://fred.stlouisfed.org/contactus/"
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 304,
+      "name": "Interest Rate Spreads",
+      "press_release": false,
+      "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 739,
+      "name": "Kansas City Fed Policy Rate Uncertainty",
+      "press_release": true,
+      "link": "https://www.kansascityfed.org/data-and-trends/kansas-city-fed-policy-rate-uncertainty/",
+      "notes": "The Kansas City Fed\u2019s Measure of Policy Rate Uncertainty (KC PRU) is a daily measure of market-based uncertainty regarding where short-term U.S. interest rates will be one year in the future."
+    },
+    {
+      "date": "2025-07-02",
       "release_id": 484,
       "name": "Key ECB Interest Rates",
       "press_release": true,
       "link": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html",
       "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 113,
+      "name": "Metropolitan Area Employment and Unemployment",
+      "press_release": true,
+      "link": "http://www.bls.gov/sae/",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 427,
+      "name": "Moody's Daily Corporate Bond Yield Averages",
+      "press_release": false,
+      "link": "",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 342,
+      "name": "Natural Gas Spot and Futures Prices (NYMEX)",
+      "press_release": true,
+      "link": "http://www.eia.gov/dnav/ng/ng_pri_fut_s1_d.htm",
+      "notes": "Prices are based on delivery at the Henry Hub in Louisiana. Official daily closing prices at 2:30 p.m. from the trading floor of the New York Mercantile Exchange (NYMEX) for a specific delivery month."
     },
     {
       "date": "2025-07-02",
@@ -355,6 +443,14 @@
       "press_release": false,
       "link": "https://apps.newyorkfed.org/markets/autorates/obfr",
       "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 242,
+      "name": "Recession Indicators Series",
+      "press_release": false,
+      "link": "http://www.oecd.org/std/leading-indicators/oecdcompositeleadingindicatorsreferenceturningpointsandcomponentseries.htm",
+      "notes": "These time series are an interpretation of US Business Cycle Expansions and Contractions data provided by The National Bureau of Economic Research (NBER) at http://www.nber.org/cycles/cyclesmain.html and Organisation of Economic Development (OECD) Composite Leading Indicators: Reference Turning Points and Component Series data provided by the OECD at http://www.oecd.org/std/leading-indicators/oecdcompositeleadingindicatorsreferenceturningpointsandcomponentseries.htm. Our time series are composed of dummy variables that represent periods of expansion and recession. The NBER identifies months and quarters, while the OECD identifies months, of turning points without designating a date within the period that turning points occurred. The dummy variable adopts an arbitrary convention that the turning point occurred at a specific date within the period. The arbitrary convention does not reflect any judgment on this issue by the NBER's Business Cycle Dating Committee or the OECD. A value of 1 is a recessionary period, while a value of 0 is an expansionary period.\r\n\r\nThe recession shading data that we provide initially comes from the source as a list of dates that are either an economic peak or trough. We interpret dates into recession shading data using one of three arbitrary methods. All of our recession shading data is available using all three interpretations. The period between a peak and trough is always shaded as a recession. The peak and trough are collectively extrema. Depending on the application, the extrema, both individually and collectively, may be included in the recession period in whole or in part. In situations where a portion of a period is included in the recession, the whole period is deemed to be included in the recession period. \r\n\r\nThe first interpretation, known as the midpoint method, is to show a recession from the midpoint of the peak through the midpoint of the trough for monthly and quarterly data. For daily data, the recession begins on the 15th of the month of the peak and ends on the 15th of the month of the trough. Daily data is a disaggregation of monthly data. For monthly and quarterly data, the entire peak and trough periods are included in the recession shading. This method shows the maximum number of periods as a recession for monthly and quarterly data. The Federal Reserve Bank of St. Louis uses this method in its own publications.\r\n\r\nThe second interpretation, known as the trough method, is to show a recession from the period following the peak through the trough (i.e. the peak is not included in the recession shading, but the trough is). For daily data, the recession begins on the first day of the first month following the peak and ends on the last day of the month of the trough. Daily data is a disaggregation of monthly data. The trough method is used when displaying data on FRED graphs.\r\n\r\nThe third interpretation, known as the peak method, is to show a recession from the period of the peak to the trough (i.e. the peak is included in the recession shading, but the trough is not). For daily data, the recession begins on the first day of the month of the peak and ends on the last day of the month preceding the trough. Daily data is a disaggregation of monthly data."
     },
     {
       "date": "2025-07-02",
@@ -379,6 +475,54 @@
       "press_release": true,
       "link": "https://www.bankofengland.co.uk/markets/sonia-benchmark",
       "notes": "SONIA is a measure of the rate at which interest is paid on sterling short-term wholesale funds in circumstances where credit, liquidity and other risks are minimal.\r\n\r\nOn each London business day, SONIA is measured as the trimmed mean, rounded to four decimal places, of interest rates paid on eligible sterling denominated deposit transactions. \r\n\r\nThe trimmed mean is calculated as the volume-weighted mean rate, based on the central 50 per cent of the volume-weighted distribution of rates."
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 394,
+      "name": "Spliced Oil Price",
+      "press_release": true,
+      "link": "",
+      "notes": "The Spliced Oil Price release was created by the Federal Reserve Bank of St. Louis to expand the history of the monthly West Texas Intermediate oil price series in FRED. We simply combined these two FRED series: https://fred.stlouisfed.org/series/OILPRICE and https://fred.stlouisfed.org/series/MCOILWTICO. From January 1946 through July 2013, the series used is OILPRICE. From August 2013 to present, the series used is MCOILWTICO."
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 212,
+      "name": "Spot Prices",
+      "press_release": false,
+      "link": "http://www.eia.doe.gov/dnav/pet/pet_pri_spt_s1_d.htm",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 189,
+      "name": "Standard & Poors",
+      "press_release": false,
+      "link": "https://us.spindices.com/indices/equity/sp-500",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 379,
+      "name": "Temporary Open Market Operations",
+      "press_release": false,
+      "link": "https://www.newyorkfed.org/markets/data-hub",
+      "notes": ""
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 116,
+      "name": "Unemployment in States and Local Areas (all other areas)",
+      "press_release": false,
+      "link": "http://www.bls.gov/lau/home.htm",
+      "notes": "The Local Area Unemployment Statistics release include monthly and annual-average estimates of civilian labor force, employed people, unemployed people, and unemployment rates for different geographies. These data are based on the Current Population Survey (CPS), the household survey that is the source of the national unemployment rate. For more details, see the frequently asked questions here: https://www.bls.gov/lau/laufaq.htm."
+    },
+    {
+      "date": "2025-07-02",
+      "release_id": 234,
+      "name": "World Development Indicators",
+      "press_release": false,
+      "link": "https://datacatalog.worldbank.org/search/dataset/0037712",
+      "notes": "The primary World Bank collection of development indicators, compiled from officially-recognized international sources. It presents the most current and accurate global development data available, and includes national, regional and global estimates."
     }
   ]
 }

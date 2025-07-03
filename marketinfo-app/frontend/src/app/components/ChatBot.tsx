@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDownIcon, PaperAirplaneIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, PaperAirplaneIcon, XMarkIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 interface Message {
   id: string;
@@ -16,7 +16,14 @@ interface ChatBotProps {
 }
 
 export default function ChatBot({ isOpen, onToggle }: ChatBotProps) {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 'welcome',
+      content: "👋 Welcome to MarketInfo AI! I'm here to help you analyze market data, trends, and answer questions about your portfolio. What would you like to know?",
+      isUser: false,
+      timestamp: new Date()
+    }
+  ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -98,95 +105,122 @@ export default function ChatBot({ isOpen, onToggle }: ChatBotProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-24 right-6 w-96 h-[500px] z-50 animate-fade-in">
-      <div className="glass-card rounded-3xl h-full flex flex-col overflow-hidden shadow-2xl">
-        {/* Header */}
-        <div className="glass border-b border-white/10 p-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-amber-500 rounded-2xl flex items-center justify-center pulse-glow">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.847a4.5 4.5 0 003.09 3.09L15.75 12l-2.847.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423L16.5 15.75l.394 1.183a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold bg-gradient-to-r from-purple-400 to-amber-400 bg-clip-text text-transparent">
-                MarketInfo AI
-              </h3>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-xs text-gray-400">Online</span>
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={onToggle}
-            className="p-2 hover:bg-white/10 rounded-xl transition-colors duration-200"
-          >
-            <XMarkIcon className="w-5 h-5 text-gray-400" />
-          </button>
-        </div>
-
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] p-3 rounded-2xl ${
-                  message.isUser
-                    ? 'bg-gradient-to-r from-purple-500 to-amber-500 text-white'
-                    : 'glass text-gray-100'
-                }`}
-              >
-                <p className="text-sm leading-relaxed">{message.content}</p>
-                <p className="text-xs mt-2 opacity-70">
-                  {message.timestamp.toLocaleTimeString([], { 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
-                  })}
-                </p>
-              </div>
-            </div>
-          ))}
-          
-          {isTyping && (
-            <div className="flex justify-start">
-              <div className="glass p-3 rounded-2xl">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+    <div className="fixed bottom-6 right-6 w-[420px] h-[600px] z-50 animate-slide-up">
+      <div className="relative h-full">
+        {/* Terminal glow effect */}
+        <div className="absolute inset-0 terminal-glow rounded-lg"></div>
+        
+        {/* Main chat container */}
+        <div className="relative h-full terminal-window terminal-text overflow-hidden">
+          {/* Header */}
+          <div className="terminal-header">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="w-8 h-8 terminal-border rounded flex items-center justify-center">
+                    <SparklesIcon className="w-4 h-4 terminal-command" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-2 h-2 terminal-prompt rounded-full animate-pulse"></div>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold terminal-command">
+                    marketinfo-ai@terminal
+                  </h3>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs terminal-prompt">●</span>
+                    <span className="text-xs terminal-output">ready</span>
+                  </div>
                 </div>
               </div>
+              <button
+                onClick={onToggle}
+                className="terminal-border-focus p-1 rounded transition-all duration-200"
+              >
+                <XMarkIcon className="w-4 h-4 terminal-command" />
+              </button>
             </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
+          </div>
 
-        {/* Input */}
-        <div className="glass border-t border-white/10 p-4">
-          <div className="flex items-center space-x-3">
-            <div className="flex-1 relative">
-              <input
-                ref={inputRef}
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Ask about market data, trends, or analysis..."
-                className="w-full glass rounded-xl px-4 py-3 text-white placeholder-gray-400 border border-white/20 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 text-sm"
-                disabled={isTyping}
-              />
+          {/* Messages */}
+          <div className="terminal-content terminal-scrollbar overflow-y-auto space-y-3 h-[calc(100%-120px)]">
+            {messages.map((message) => (
+              <div
+                key={message.id}
+                className={`flex ${message.isUser ? 'justify-end' : 'justify-start'} animate-fade-in`}
+              >
+                <div className="flex items-start space-x-2 max-w-[85%]">
+                  {!message.isUser && (
+                    <div className="w-6 h-6 terminal-border rounded flex items-center justify-center flex-shrink-0 mt-1">
+                      <SparklesIcon className="w-3 h-3 terminal-command" />
+                    </div>
+                  )}
+                  <div
+                    className={`p-3 rounded terminal-border ${
+                      message.isUser
+                        ? 'terminal-bg-light terminal-command ml-auto'
+                        : 'terminal-bg terminal-output'
+                    }`}
+                  >
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                    <p className={`text-xs mt-2 opacity-60`}>
+                      [{message.timestamp.toLocaleTimeString([], { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })}]
+                    </p>
+                  </div>
+                  {message.isUser && (
+                    <div className="w-6 h-6 terminal-border rounded flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-3 h-3 terminal-prompt" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+            
+            {isTyping && (
+              <div className="flex justify-start animate-fade-in">
+                <div className="flex items-start space-x-2">
+                  <div className="w-6 h-6 terminal-border rounded flex items-center justify-center flex-shrink-0">
+                    <SparklesIcon className="w-3 h-3 terminal-command" />
+                  </div>
+                  <div className="terminal-bg terminal-border p-3 rounded">
+                    <div className="flex items-center space-x-1">
+                      <span className="terminal-cursor text-sm">thinking</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input */}
+          <div className="absolute bottom-0 left-0 right-0 terminal-bg terminal-border-focus p-4">
+            <div className="flex items-center space-x-2">
+              <span className="terminal-prompt text-sm">$</span>
+              <div className="flex-1 relative">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="query market data..."
+                  className="w-full terminal-bg terminal-border rounded px-3 py-2 terminal-text placeholder-gray-500 focus:outline-none focus:terminal-border-focus text-sm transition-all duration-200"
+                  disabled={isTyping}
+                />
+              </div>
+              <button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || isTyping}
+                className="terminal-border terminal-glow-hover p-2 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0"
+              >
+                <PaperAirplaneIcon className="w-4 h-4 terminal-command" />
+              </button>
             </div>
-            <button
-              onClick={handleSendMessage}
-              disabled={!inputValue.trim() || isTyping}
-              className="p-3 bg-gradient-to-r from-purple-500 to-amber-500 rounded-xl hover:from-purple-600 hover:to-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex-shrink-0"
-            >
-              <PaperAirplaneIcon className="w-4 h-4 text-white" />
-            </button>
           </div>
         </div>
       </div>

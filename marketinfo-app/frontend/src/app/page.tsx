@@ -25,6 +25,7 @@ import CryptoMarketCapPieChart from './components/CryptoMarketCapPieChart';
 import CombinedIndicesChart from './components/CombinedIndicesChart';
 import ChatBot from './components/ChatBot';
 import FloatingChatButton from './components/FloatingChatButton';
+import TickerTape from './components/TickerTape';
 
 
 export default function Dashboard() {
@@ -33,6 +34,8 @@ export default function Dashboard() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+
 
   useEffect(() => {
     setIsMounted(true);
@@ -77,32 +80,18 @@ export default function Dashboard() {
         )}
       </div>
       
-      {/* Header */}
+      {/* Ticker Tape Header */}
+      <TickerTape watchlist={['NVDA', 'AAPL', 'AMZN', 'MSFT', 'GOOGL', 'TSLA', 'META']} />
+      
+      {/* Brand Header */}
       <header className="relative z-10 glass backdrop-blur-xl border-b border-white/10 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-8">
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-amber-500 rounded-2xl flex items-center justify-center pulse-glow">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6z" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h1 className="text-5xl font-black bg-gradient-to-r from-purple-400 via-amber-400 to-pink-400 bg-clip-text text-transparent neon-text">
-                  marketinfo
-                </h1>
-                <p className="text-gray-400 text-sm font-medium">personal dashboard for market analysis</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-6">
-              <div className="hidden md:flex items-center space-x-2 glass rounded-full px-4 py-2">
-                <svg className="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
-                </svg>
-                <span className="text-xs text-gray-400">Updated now</span>
-              </div>
+          <div className="flex justify-center items-center py-6">
+            <div className="text-center">
+              <h1 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-amber-400 to-pink-400 bg-clip-text text-transparent neon-text tracking-tight">
+                marketinfo
+              </h1>
+              <p className="text-gray-400 text-sm font-medium">personal dashboard for market analysis</p>
             </div>
           </div>
         </div>
@@ -114,13 +103,7 @@ export default function Dashboard() {
 
         {/* Economic Calendar & Market Overview Section - 3 Column Layout */}
         <section className="animate-fade-in">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-4xl font-bold text-white">
-              Market Pulse
-              <span className="block text-lg font-normal text-gray-400 mt-2">Key indicators at a glance</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
             {/* Economic Calendar */}
             <div className="glass-card rounded-3xl p-8 card-hover animate-fade-in-left h-full">
               <div className="flex items-center space-x-3 mb-6">
@@ -209,10 +192,11 @@ export default function Dashboard() {
                 <select
                   value={selectedSymbol}
                   onChange={(e) => setSelectedSymbol(e.target.value)}
-                  className="glass rounded-xl px-4 py-2 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 text-sm font-medium"
+                  className="bg-black/50 backdrop-blur-sm border border-white/30 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 text-sm font-medium cursor-pointer hover:bg-black/70 transition-colors"
+                  style={{ minWidth: '80px' }}
                 >
                   {availableSymbols.map(symbol => (
-                    <option key={symbol} value={symbol} className="bg-gray-900">{symbol}</option>
+                    <option key={symbol} value={symbol} className="bg-gray-900 text-white">{symbol}</option>
                   ))}
                 </select>
               </div>
@@ -283,6 +267,8 @@ export default function Dashboard() {
             </div>
           </div>
         </section>
+
+
       </main>
       
 

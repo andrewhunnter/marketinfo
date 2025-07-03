@@ -2,66 +2,66 @@
   "market_indices": {
     "sp500": {
       "symbol": "SPY",
-      "price": 617.65,
-      "open": 616.36,
-      "high": 618.83,
-      "low": 615.52,
-      "volume": 70030140,
-      "change": -2.4414062522737368e-05,
-      "change_percent": -3.952734001087091e-06,
+      "price": 620.45,
+      "open": 617.24,
+      "high": 620.49,
+      "low": 616.61,
+      "volume": 66519184,
+      "change": 2.7999755859375455,
+      "change_percent": 0.45332720396048876,
       "previous_close": 617.6500244140625,
-      "timestamp": "2025-07-02T14:29:02.940088",
+      "timestamp": "2025-07-03T02:18:54.973271",
       "data_date": "2025-07-02",
-      "polygon_close": 617.65,
-      "polygon_open": 616.36,
-      "polygon_volume": 70030140.0,
-      "polygon_high": 618.83,
-      "polygon_low": 615.52,
-      "polygon_timestamp": 1751400000000
+      "polygon_close": 620.45,
+      "polygon_open": 617.24,
+      "polygon_volume": 66519184.0,
+      "polygon_high": 620.49,
+      "polygon_low": 616.61,
+      "polygon_timestamp": 1751486400000
     },
     "nasdaq100": {
       "symbol": "QQQ",
-      "price": 546.99,
-      "open": 549.73,
-      "high": 550.71,
-      "low": 544.66,
-      "volume": 56166736,
-      "change": 9.765625009094947e-06,
-      "change_percent": 1.7853388879951091e-06,
+      "price": 550.8,
+      "open": 546.16,
+      "high": 551.0,
+      "low": 546.12,
+      "volume": 36599029,
+      "change": 3.8100097656249545,
+      "change_percent": 0.6965410398081392,
       "previous_close": 546.989990234375,
-      "timestamp": "2025-07-02T14:29:03.818349",
+      "timestamp": "2025-07-03T02:18:55.592720",
       "data_date": "2025-07-02",
-      "polygon_close": 546.99,
-      "polygon_open": 549.73,
-      "polygon_volume": 56166736.0,
-      "polygon_high": 550.71,
-      "polygon_low": 544.66,
-      "polygon_timestamp": 1751400000000
+      "polygon_close": 550.8,
+      "polygon_open": 546.16,
+      "polygon_volume": 36599029.0,
+      "polygon_high": 551,
+      "polygon_low": 546.12,
+      "polygon_timestamp": 1751486400000
     },
     "vix": {
       "symbol": "^VIX",
-      "price": 17.020000457763672,
+      "price": 16.639999389648438,
       "open": 16.75,
       "high": 17.3700008392334,
-      "low": 16.739999771118164,
+      "low": 16.540000915527344,
       "volume": 0,
-      "change": 0.1900005340576172,
-      "change_percent": 1.1289396014196658,
+      "change": -0.1900005340576172,
+      "change_percent": -1.1289396014196658,
       "previous_close": 16.829999923706055,
-      "timestamp": "2025-07-02T14:29:04.422427",
+      "timestamp": "2025-07-03T02:18:56.177662",
       "data_date": "2025-07-02"
     }
   },
   "interest_rates": {
     "us10yr": {
-      "yield_percent": 4.290999889373779,
-      "change": 0.021999835968017578,
-      "timestamp": "2025-07-02T14:29:05.728182"
+      "yield_percent": 4.293000221252441,
+      "change": 0.024000167846679688,
+      "timestamp": "2025-07-03T02:18:57.448337"
     },
     "fed_funds_rate": {
       "rate_percent": 0.8,
       "date": "1954-07-01",
-      "timestamp": "2025-07-02T14:29:05.884102",
+      "timestamp": "2025-07-03T02:18:57.627915",
       "source": "FRED"
     }
   },
@@ -71,7 +71,7 @@
       "change_mom": 1.153353267834257,
       "change_yoy": 10.24208566108007,
       "date": "1948-01-01",
-      "timestamp": "2025-07-02T14:29:06.027574",
+      "timestamp": "2025-07-03T02:18:57.762825",
       "source": "FRED"
     },
     "retail_sales": {
@@ -79,22 +79,22 @@
       "change_mom": 1.0787698803155803,
       "change_yoy": 6.485233419401045,
       "date": "1993-01-01",
-      "timestamp": "2025-07-02T14:29:06.184481",
+      "timestamp": "2025-07-03T02:18:57.909225",
       "source": "FRED"
     },
     "unemployment_rate": {
       "rate_percent": 3.4,
       "date": "1948-01-01",
-      "timestamp": "2025-07-02T14:29:06.400529",
+      "timestamp": "2025-07-03T02:18:58.029832",
       "source": "FRED"
     },
     "inflation_rate": {
       "rate_percent": 1.45797598627791,
       "date": "1960-01-01",
-      "timestamp": "2025-07-02T14:29:06.546725",
+      "timestamp": "2025-07-03T02:18:58.145255",
       "source": "FRED"
     }
   },
-  "timestamp": "2025-07-02T14:29:06.547031",
+  "timestamp": "2025-07-03T02:18:58.145392",
   "data_type": "macro"
 }

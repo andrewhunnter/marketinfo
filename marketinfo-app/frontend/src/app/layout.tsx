@@ -72,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-black text-white custom-scrollbar`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-black text-green-400 custom-scrollbar terminal-text`}
       >
         {children}
       </body>

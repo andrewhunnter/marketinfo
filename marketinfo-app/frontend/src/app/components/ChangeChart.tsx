@@ -119,7 +119,7 @@ export default function ChangeChart() {
           const cryptoData = data.crypto_prices[crypto.symbol];
           if (!cryptoData) return null;
 
-          const change = cryptoData.change_24h * 100; // Convert to percentage
+          const change = cryptoData.change_24h; // Already a percentage value
           const changeColor = getChangeColor(change);
           const changeBgColor = getChangeBgColor(change);
           const changeBorderColor = getChangeBorderColor(change);

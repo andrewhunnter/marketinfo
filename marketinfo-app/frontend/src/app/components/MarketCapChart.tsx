@@ -118,9 +118,10 @@ export default function MarketCapChart() {
   const getMarketCapChange = (marketCap: number, priceChange: number) => {
     // Since market cap = price × supply, and supply is constant,
     // market cap change percentage equals price change percentage
-    const changeAmount = marketCap * priceChange;
+    // priceChange is already a percentage value, so convert to decimal for amount calculation
+    const changeAmount = marketCap * (priceChange / 100);
     return {
-      percentage: priceChange * 100,
+      percentage: priceChange, // Use as-is since it's already a percentage
       amount: changeAmount
     };
   };
